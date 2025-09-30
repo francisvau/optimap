@@ -1,0 +1,13 @@
+.constraint-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .constraint-tag {
+        font-size: 12px !important;
+
+        svg {
+            font-size: 12px !important;
+        }
+    }
+}

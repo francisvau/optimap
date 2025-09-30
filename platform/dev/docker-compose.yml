@@ -1,0 +1,93 @@
+x-common-config: &common-config
+  restart: no
+  networks:
+    - optimap-network
+  env_file:
+    - .env
+
+services:
+  nginx:
+    <<: *common-config
+    container_name: optimap-nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - backend
+      - engine
+      - frontend
+
+  backend:
+    <<: *common-config
+    container_name: optimap-backend
+    build:
+      context: ${BACKEND_DIR}
+      dockerfile: ${BACKEND_DIR}/Dockerfile.dev
+    command: sh -c "alembic upgrade heads && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - ${BACKEND_DIR}:/app
+    environment:
+      - POSTGRES_HOST=optimap-postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  engine:
+    <<: *common-config
+    container_name: optimap-engine
+    build:
+      context: ${ENGINE_DIR}
+      dockerfile: ${ENGINE_DIR}/Dockerfile.dev
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload"
+    volumes:
+      - ${ENGINE_DIR}:/app
+    environment:
+      - MONGO_HOST=mongodb
+    depends_on:
+      - mongodb
+
+  frontend:
+    <<: *common-config
+    container_name: optimap-frontend
+    build:
+      context: ${FRONTEND_DIR}
+      dockerfile: ${FRONTEND_DIR}/Dockerfile.dev
+    command: sh -c "npm run dev -- --host 0.0.0.0 --port 5173"
+    volumes:
+      - ${FRONTEND_DIR}/src:/app/src
+
+  postgres:
+    <<: *common-config
+    container_name: optimap-postgres
+    image: postgres:13
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\""]
+      interval: 10s
+      retries: 5
+
+  mongodb:
+    <<: *common-config
+    container_name: optimap-mongodb
+    image: mongo:6.0
+    command: mongod --quiet --logpath /dev/null 
+    volumes:
+      - mongo:/data/db
+    ports:
+      - "27017:27017"
+
+networks:
+  optimap-network:
+    name: optimap-network
+    driver: bridge
+
+volumes:
+  postgres:
+  mongo:

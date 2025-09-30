@@ -1,0 +1,79 @@
+@use '../../../variables';
+
+.p-badge {
+    background: variables.$badgeBg;
+    color: variables.$badgeTextColor;
+    font-size: variables.$badgeFontSize;
+    font-weight: variables.$badgeFontWeight;
+    min-width: variables.$badgeMinWidth;
+    height: variables.$badgeHeight;
+    line-height: variables.$badgeHeight;
+
+    &.p-badge-secondary {
+        background-color: variables.$secondaryButtonBg;
+        color: variables.$secondaryButtonTextColor;
+    }
+
+    &.p-badge-success {
+        background-color: variables.$successButtonBg;
+        color: variables.$successButtonTextColor;
+    }
+
+    &.p-badge-info {
+        background-color: variables.$infoButtonBg;
+        color: variables.$infoButtonTextColor;
+    }
+
+    &.p-badge-warning {
+        background-color: variables.$warningButtonBg;
+        color: variables.$warningButtonTextColor;
+    }
+
+    &.p-badge-danger {
+        background-color: variables.$dangerButtonBg;
+        color: variables.$dangerButtonTextColor;
+    }
+
+    &.p-badge-lg {
+        font-size: 1.5 * variables.$badgeFontSize;
+        min-width: 1.5 * variables.$badgeMinWidth;
+        height: 1.5 * variables.$badgeHeight;
+        line-height: 1.5 * variables.$badgeHeight;
+    }
+
+    &.p-badge-xl {
+        font-size: 2 * variables.$badgeFontSize;
+        min-width: 2 * variables.$badgeMinWidth;
+        height: 2 * variables.$badgeHeight;
+        line-height: 2 * variables.$badgeHeight;
+    }
+}
+
+.p-tag {
+    background: variables.$badgeBg;
+    color: variables.$badgeTextColor;
+    font-size: variables.$badgeFontSize;
+    font-weight: variables.$badgeFontWeight;
+    padding: variables.$tagPadding;
+    border-radius: variables.$borderRadius;
+
+    &.p-tag-success {
+        background-color: variables.$successButtonBg;
+        color: variables.$successButtonTextColor;
+    }
+
+    &.p-tag-info {
+        background-color: variables.$infoButtonBg;
+        color: variables.$infoButtonTextColor;
+    }
+
+    &.p-tag-warning {
+        background-color: variables.$warningButtonBg;
+        color: variables.$warningButtonTextColor;
+    }
+
+    &.p-tag-danger {
+        background-color: variables.$dangerButtonBg;
+        color: variables.$dangerButtonTextColor;
+    }
+}

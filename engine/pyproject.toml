@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "engine"
+version = "0.1.0"
+description = ""
+authors = ["Optimap Prime <info@optimaprime.be>"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
+gunicorn = "^23.0.0"
+groq = "^0.24.0"
+motor = { extras = ["srv"], version = "^3.7.0" }
+pymongo = "^4.11.1"
+tiktoken = "^0.9.0"
+google-genai = "^1.13.0"
+openai = "^1.78.0"
+jsf = "^0.11.2"
+jsonata-python = "^0.5.3"
+jsonschema = "^4.23.0"
+types-jsonschema = "^4.23.0.20241208"
+pytest-cov = "^6.1.1"
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
+httpx = "^0.28.1"
+
+[tool.poetry.group.dev.dependencies]
+httpx = "^0.28.1"
+ruff = "^0.11.9"
+mypy = "^1.15.0"
+taskipy = "^1.14.1"
+coverage = "^7.6.12"
+pytest = "^8.3.4"
+pytest-mock = "^3.14.0"
+pytest-asyncio = "^0.26.0"
+pytest-env = "^1.1.5"
+pytest-dotenv = "^0.5.2"
+pytest-xdist = "^3.6.1"
+
+[tool.taskipy.tasks]
+lint = "ruff check --fix app/ test/ && mypy app/"
+format = "ruff format app/ test/"
+test = "pytest test -sn auto"
+coverage = "coverage run --source=app -m pytest test -sn auto && coverage report -m"
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+warn_return_any = true
+warn_unused_configs = true
+strict = true
+exclude = ["test/"]
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Running Prettier (auto-fixing formatting issues)..."
+npm run format || { echo "Formatting failed. Please try manual formatting using the following command: npm run format"; exit 1; }
+
+echo "Running ESLint (auto-fixing lint issues)..."
+npm run lint || { echo "Linting failed. Please try manual linting and typechecking using the following command: npm run lint"; exit 1; }
+
+# git add  src test
+
+echo "All fixes applied and checks passed!"

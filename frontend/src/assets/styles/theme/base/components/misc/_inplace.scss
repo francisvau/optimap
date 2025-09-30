@@ -1,0 +1,19 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-inplace {
+    .p-inplace-display {
+        padding: variables.$inplacePadding;
+        border-radius: variables.$borderRadius;
+        transition: variables.$formElementTransition;
+
+        &:not(.p-disabled):hover {
+            background: variables.$inplaceHoverBg;
+            color: variables.$inplaceTextHoverColor;
+        }
+
+        &:focus {
+            @include mixins.focused();
+        }
+    }
+}

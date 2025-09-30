@@ -1,0 +1,438 @@
+@use '../../../variables';
+@use '../../mixins';
+
+// core
+.p-treetable {
+    position: relative;
+}
+
+.p-treetable > .p-treetable-wrapper {
+    overflow: auto;
+}
+
+.p-treetable table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.p-treetable .p-sortable-column {
+    cursor: pointer;
+    user-select: none;
+}
+
+.p-treetable-selectable .p-treetable-tbody > tr {
+    cursor: pointer;
+}
+
+.p-treetable-toggler {
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+}
+
+.p-treetable-toggler + .p-checkbox {
+    vertical-align: middle;
+}
+
+.p-treetable-toggler + .p-checkbox + span {
+    vertical-align: middle;
+}
+
+/* Resizable */
+.p-treetable-resizable > .p-treetable-wrapper {
+    overflow-x: auto;
+}
+
+.p-treetable-resizable .p-treetable-thead > tr > th,
+.p-treetable-resizable .p-treetable-tfoot > tr > td,
+.p-treetable-resizable .p-treetable-tbody > tr > td {
+    overflow: hidden;
+}
+
+.p-treetable-resizable .p-resizable-column {
+    background-clip: padding-box;
+    position: relative;
+}
+
+.p-treetable-resizable-fit .p-resizable-column:last-child .p-column-resizer {
+    display: none;
+}
+
+.p-treetable .p-column-resizer {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: 0.5rem;
+    height: 100%;
+    padding: 0px;
+    cursor: col-resize;
+    border: 1px solid transparent;
+}
+
+.p-treetable .p-column-resizer-helper {
+    width: 1px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+}
+
+/* Scrollable */
+.p-treetable-scrollable-wrapper {
+    position: relative;
+}
+.p-treetable-scrollable-header,
+.p-treetable-scrollable-footer {
+    overflow: hidden;
+    border: 0 none;
+}
+
+.p-treetable-scrollable-body {
+    overflow: auto;
+    position: relative;
+}
+
+.p-treetable-virtual-table {
+    position: absolute;
+}
+
+/* Frozen Columns */
+.p-treetable-frozen-view .p-treetable-scrollable-body {
+    overflow: hidden;
+}
+
+.p-treetable-unfrozen-view {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/* Reorder */
+.p-treetable-reorder-indicator-up,
+.p-treetable-reorder-indicator-down {
+    position: absolute;
+    display: none;
+}
+
+/* Loader */
+.p-treetable .p-treetable-loading-overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* Alignment */
+.p-treetable .p-treetable-thead > tr > th.p-align-left > .p-column-header-content,
+.p-treetable .p-treetable-tbody > tr > td.p-align-left,
+.p-treetable .p-treetable-tfoot > tr > td.p-align-left {
+    text-align: left;
+    justify-content: flex-start;
+}
+.p-treetable .p-treetable-thead > tr > th.p-align-right > .p-column-header-content,
+.p-treetable .p-treetable-tbody > tr > td.p-align-right,
+.p-treetable .p-treetable-tfoot > tr > td.p-align-right {
+    text-align: right;
+    justify-content: flex-end;
+}
+.p-treetable .p-treetable-thead > tr > th.p-align-center > .p-column-header-content,
+.p-treetable .p-treetable-tbody > tr > td.p-align-center,
+.p-treetable .p-treetable-tfoot > tr > td.p-align-center {
+    text-align: center;
+    justify-content: center;
+}
+
+// theme
+.p-treetable {
+    .p-paginator-top {
+        border-width: variables.$tableTopPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-paginator-bottom {
+        border-width: variables.$tableBottomPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-treetable-header {
+        background: variables.$tableHeaderBg;
+        color: variables.$tableHeaderTextColor;
+        border: variables.$tableHeaderBorder;
+        border-width: variables.$tableHeaderBorderWidth;
+        padding: variables.$tableHeaderPadding;
+        font-weight: variables.$tableHeaderFontWeight;
+    }
+
+    .p-treetable-footer {
+        background: variables.$tableFooterBg;
+        color: variables.$tableFooterTextColor;
+        border: variables.$tableFooterBorder;
+        border-width: variables.$tableFooterBorderWidth;
+        padding: variables.$tableFooterPadding;
+        font-weight: variables.$tableFooterFontWeight;
+    }
+
+    .p-treetable-thead > tr > th {
+        text-align: variables.$tableCellContentAlignment;
+        padding: variables.$tableHeaderCellPadding;
+        border: variables.$tableHeaderCellBorder;
+        border-width: variables.$tableHeaderCellBorderWidth;
+        font-weight: variables.$tableHeaderCellFontWeight;
+        color: variables.$tableHeaderCellTextColor;
+        background: variables.$tableHeaderCellBg;
+        transition: variables.$listItemTransition;
+    }
+
+    .p-treetable-tfoot > tr > td {
+        text-align: variables.$tableCellContentAlignment;
+        padding: variables.$tableFooterCellPadding;
+        border: variables.$tableFooterCellBorder;
+        border-width: variables.$tableFooterCellBorderWidth;
+        font-weight: variables.$tableFooterCellFontWeight;
+        color: variables.$tableFooterCellTextColor;
+        background: variables.$tableFooterCellBg;
+    }
+
+    .p-sortable-column {
+        outline-color: variables.$focusOutlineColor;
+
+        .p-sortable-column-icon {
+            color: variables.$tableHeaderCellIconColor;
+            margin-left: variables.$inlineSpacing;
+        }
+
+        .p-sortable-column-badge {
+            border-radius: 50%;
+            height: variables.$tableSortableColumnBadgeSize;
+            min-width: variables.$tableSortableColumnBadgeSize;
+            line-height: variables.$tableSortableColumnBadgeSize;
+            color: variables.$highlightTextColor;
+            background: variables.$highlightBg;
+            margin-left: variables.$inlineSpacing;
+        }
+
+        &:not(.p-highlight):hover {
+            background: variables.$tableHeaderCellHoverBg;
+            color: variables.$tableHeaderCellTextHoverColor;
+
+            .p-sortable-column-icon {
+                color: variables.$tableHeaderCellIconHoverColor;
+            }
+        }
+
+        &.p-highlight {
+            background: variables.$tableHeaderCellHighlightBg;
+            color: variables.$tableHeaderCellHighlightTextColor;
+
+            .p-sortable-column-icon {
+                color: variables.$tableHeaderCellHighlightTextColor;
+            }
+        }
+    }
+
+    .p-treetable-tbody {
+        > tr {
+            background: variables.$tableBodyRowBg;
+            color: variables.$tableBodyRowTextColor;
+            transition: variables.$listItemTransition;
+
+            > td {
+                text-align: variables.$tableCellContentAlignment;
+                border: variables.$tableBodyCellBorder;
+                border-width: variables.$tableBodyCellBorderWidth;
+                padding: variables.$tableBodyCellPadding;
+
+                .p-treetable-toggler {
+                    @include mixins.action-icon();
+                    & {
+                        margin-right: variables.$inlineSpacing;
+                    }
+
+                    & + .p-checkbox {
+                        margin-right: variables.$inlineSpacing;
+
+                        .p-indeterminate {
+                            .p-checkbox-icon {
+                                color: variables.$textColor;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:focus-visible {
+                outline: 0.15rem solid variables.$focusOutlineColor;
+                outline-offset: -0.15rem;
+            }
+
+            &.p-highlight {
+                background: variables.$highlightBg;
+                color: variables.$highlightTextColor;
+
+                .p-treetable-toggler {
+                    color: variables.$highlightTextColor;
+
+                    &:hover {
+                        color: variables.$highlightTextColor;
+                    }
+                }
+            }
+        }
+    }
+
+    &.p-treetable-selectable,
+    &.p-treetable-hoverable-rows {
+        .p-treetable-tbody > tr:not(.p-highlight):hover {
+            background: variables.$tableBodyRowHoverBg;
+            color: variables.$tableBodyRowTextHoverColor;
+
+            .p-treetable-toggler {
+                color: variables.$tableBodyRowTextHoverColor;
+            }
+        }
+    }
+
+    .p-column-resizer-helper {
+        background: variables.$tableResizerHelperBg;
+    }
+
+    .p-treetable-scrollable-header,
+    .p-treetable-scrollable-footer {
+        background: variables.$panelHeaderBg;
+    }
+
+    .p-treetable-loading-icon {
+        font-size: variables.$loadingIconFontSize;
+
+        &.p-icon {
+            width: variables.$loadingIconFontSize;
+            height: variables.$loadingIconFontSize;
+        }
+    }
+
+    &.p-treetable-gridlines {
+        .p-treetable-header {
+            border-width: 1px 1px 0 1px;
+        }
+
+        .p-treetable-footer {
+            border-width: 0 1px 1px 1px;
+        }
+
+        .p-treetable-top {
+            border-width: 0 1px 0 1px;
+        }
+
+        .p-treetable-bottom {
+            border-width: 0 1px 1px 1px;
+        }
+
+        .p-treetable-thead {
+            > tr {
+                > th {
+                    border-width: 1px;
+                }
+            }
+        }
+
+        .p-treetable-tbody {
+            > tr {
+                > td {
+                    border-width: 1px;
+                }
+            }
+        }
+
+        .p-treetable-tfoot {
+            > tr {
+                > td {
+                    border-width: 1px;
+                }
+            }
+        }
+    }
+
+    &.p-treetable-striped {
+        .p-treetable-tbody {
+            > tr.p-row-odd {
+                background: variables.$tableBodyRowEvenBg;
+
+                &.p-highlight {
+                    background: variables.$highlightBg;
+                    color: variables.$highlightTextColor;
+
+                    .p-row-toggler {
+                        color: variables.$highlightTextColor;
+
+                        &:hover {
+                            color: variables.$highlightTextColor;
+                        }
+                    }
+                }
+
+                & + .p-row-expanded {
+                    background: variables.$tableBodyRowEvenBg;
+                }
+            }
+        }
+    }
+
+    &.p-treetable-sm {
+        .p-treetable-header {
+            @include mixins.scaledPadding(variables.$tableHeaderPadding, variables.$scaleSM);
+        }
+
+        .p-treetable-thead > tr > th {
+            @include mixins.scaledPadding(
+                variables.$tableHeaderCellPadding,
+                variables.$tableScaleSM
+            );
+        }
+
+        .p-treetable-tbody > tr > td {
+            @include mixins.scaledPadding(variables.$tableBodyCellPadding, variables.$tableScaleSM);
+        }
+
+        .p-treetable-tfoot > tr > td {
+            @include mixins.scaledPadding(variables.$tableFooterPadding, variables.$tableScaleSM);
+        }
+
+        .p-treetable-footer {
+            @include mixins.scaledPadding(variables.$tableFooterPadding, variables.$tableScaleSM);
+        }
+    }
+
+    &.p-treetable-lg {
+        .p-treetable-header {
+            @include mixins.scaledPadding(variables.$tableHeaderPadding, variables.$tableScaleLG);
+        }
+
+        .p-treetable-thead > tr > th {
+            @include mixins.scaledPadding(
+                variables.$tableHeaderCellPadding,
+                variables.$tableScaleLG
+            );
+        }
+
+        .p-treetable-tbody > tr > td {
+            @include mixins.scaledPadding(variables.$tableBodyCellPadding, variables.$tableScaleLG);
+        }
+
+        .p-treetable-tfoot > tr > td {
+            @include mixins.scaledPadding(variables.$tableFooterPadding, variables.$tableScaleLG);
+        }
+
+        .p-treetable-footer {
+            @include mixins.scaledPadding(variables.$tableFooterPadding, variables.$tableScaleLG);
+        }
+    }
+}

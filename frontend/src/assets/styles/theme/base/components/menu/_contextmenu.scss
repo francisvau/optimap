@@ -1,0 +1,42 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-contextmenu {
+    padding: variables.$verticalMenuPadding;
+    background: variables.$overlayMenuBg;
+    color: variables.$menuTextColor;
+    border: variables.$overlayMenuBorder;
+    box-shadow: variables.$overlayMenuShadow;
+    border-radius: variables.$borderRadius;
+    width: variables.$menuWidth;
+
+    .p-contextmenu-root-list {
+        outline: 0 none;
+    }
+
+    .p-submenu-list {
+        padding: variables.$verticalMenuPadding;
+        background: variables.$overlayMenuBg;
+        border: variables.$overlayMenuBorder;
+        box-shadow: variables.$overlayMenuShadow;
+        border-radius: variables.$borderRadius;
+    }
+
+    .p-menuitem {
+        @include mixins.menuitem-link();
+    }
+
+    .p-menuitem-separator {
+        border-top: variables.$divider;
+        margin: variables.$menuSeparatorMargin;
+    }
+
+    .p-submenu-icon {
+        font-size: variables.$menuitemSubmenuIconFontSize;
+
+        &.p-icon {
+            width: variables.$menuitemSubmenuIconFontSize;
+            height: variables.$menuitemSubmenuIconFontSize;
+        }
+    }
+}

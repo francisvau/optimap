@@ -1,0 +1,49 @@
+@use '../../../variables';
+
+.p-datascroller {
+    .p-paginator-top {
+        border-width: variables.$tableTopPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-paginator-bottom {
+        border-width: variables.$tableBottomPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-datascroller-header {
+        background: variables.$tableHeaderBg;
+        color: variables.$tableHeaderTextColor;
+        border: variables.$tableHeaderBorder;
+        border-width: variables.$tableHeaderBorderWidth;
+        padding: variables.$tableHeaderPadding;
+        font-weight: variables.$tableHeaderFontWeight;
+    }
+
+    .p-datascroller-content {
+        background: variables.$tableBodyRowBg;
+        color: variables.$tableBodyRowTextColor;
+        border: variables.$dataViewContentBorder;
+        padding: variables.$dataViewContentPadding;
+    }
+
+    &.p-datascroller-inline {
+        .p-datascroller-list {
+            > li {
+                border: variables.$dataViewListItemBorder;
+                border-width: variables.$dataViewListItemBorderWidth;
+            }
+        }
+    }
+
+    .p-datascroller-footer {
+        background: variables.$tableFooterBg;
+        color: variables.$tableFooterTextColor;
+        border: variables.$tableFooterBorder;
+        border-width: variables.$tableFooterBorderWidth;
+        padding: variables.$tableFooterPadding;
+        font-weight: variables.$tableFooterFontWeight;
+        border-bottom-left-radius: variables.$borderRadius;
+        border-bottom-right-radius: variables.$borderRadius;
+    }
+}

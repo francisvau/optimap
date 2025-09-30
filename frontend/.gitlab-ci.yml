@@ -1,0 +1,78 @@
+stages:
+  - build
+  - test
+  - build-docker
+  - deploy
+
+variables:
+  CACHE_PATH: node_modules
+  LOCAL_REGISTRY: "registry.optimaprime.be"
+  IMAGE_NAME: "optimap-frontend"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - $CACHE_PATH
+    - export IMAGE_TAG="$LOCAL_REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHA"
+
+before_script:
+  - npm ci --include=dev
+
+build-job:
+  stage: build
+  image: node:20
+  script:
+    - npm run build
+
+unit-test-job:
+  stage: test
+  image: node:20  
+  script:
+    - npm run test:unit
+
+e2e-test-job:
+  stage: test
+  image: cypress/included:12.0.0
+  script:
+    - npm run test:e2e
+
+lint-test-job:
+  stage: test
+  image: node:20
+  script:
+    - npm run lint
+    - npm run format
+
+docker-build:
+  stage: build-docker
+  image:
+    name: gcr.io/kaniko-project/executor:v1.19.2-debug
+    entrypoint: [""]
+  variables:
+    IMAGE_TAG: "$LOCAL_REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHA"
+    LATEST_TAG: "$LOCAL_REGISTRY/$IMAGE_NAME:latest"
+  before_script:
+    - echo "Configuring Kaniko authentication..."
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$LOCAL_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile.prod"
+      --destination "${IMAGE_TAG}"
+      --destination "${LATEST_TAG}"
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  before_script: []
+  variables:
+    IMAGE_TAG: "$LOCAL_REGISTRY/$IMAGE_NAME:$CI_COMMIT_SHA"
+  script:
+    - echo "Deploying to Kubernetes..."
+    - kubectl set image deployment/optimap-frontend $IMAGE_NAME="$IMAGE_TAG" -n default
+    - kubectl rollout status deployment/optimap-frontend -n default
+  only:
+    - main

@@ -1,0 +1,59 @@
+@use '../../../variables';
+@use '../../mixins';
+
+@use 'sass:math';
+
+.p-steps {
+    .p-steps-item {
+        .p-menuitem-link {
+            background: transparent;
+            transition: variables.$listItemTransition;
+            border-radius: variables.$borderRadius;
+            background: variables.$stepsItemBg;
+
+            .p-steps-number {
+                color: variables.$stepsItemNumberColor;
+                border: variables.$stepsItemBorder;
+                background: variables.$stepsItemBg;
+                min-width: variables.$stepsItemNumberWidth;
+                height: variables.$stepsItemNumberHeight;
+                line-height: variables.$stepsItemNumberHeight;
+                font-size: variables.$stepsItemNumberFontSize;
+                z-index: 1;
+                border-radius: variables.$stepsItemNumberBorderRadius;
+            }
+
+            .p-steps-title {
+                margin-top: variables.$inlineSpacing;
+                color: variables.$stepsItemTextColor;
+            }
+
+            &:not(.p-disabled):focus-visible {
+                @include mixins.focused();
+            }
+        }
+
+        &.p-highlight {
+            .p-steps-number {
+                background: variables.$highlightBg;
+                color: variables.$highlightTextColor;
+            }
+
+            .p-steps-title {
+                font-weight: variables.$stepsItemActiveFontWeight;
+                color: variables.$textColor;
+            }
+        }
+
+        &:before {
+            content: ' ';
+            border-top: variables.$divider;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            display: block;
+            position: absolute;
+            margin-top: math.div(-1 * variables.$stepsItemNumberHeight, 2);
+        }
+    }
+}

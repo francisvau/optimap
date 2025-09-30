@@ -1,0 +1,86 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-dialog {
+    border-radius: variables.$borderRadius;
+    box-shadow: variables.$overlayContainerShadow;
+    border: variables.$overlayContentBorder;
+    max-width: 600px;
+    width: 100%;
+    margin: 1rem;
+
+    .p-dialog-header {
+        border-bottom: variables.$dialogHeaderBorder;
+        background: variables.$dialogHeaderBg;
+        color: variables.$dialogHeaderTextColor;
+        padding: variables.$dialogHeaderPadding;
+        border-top-right-radius: variables.$borderRadius;
+        border-top-left-radius: variables.$borderRadius;
+
+        .p-dialog-title {
+            font-weight: variables.$dialogHeaderFontWeight;
+            font-size: variables.$dialogHeaderFontSize;
+        }
+
+        .p-dialog-header-icon {
+            @include mixins.action-icon();
+
+            & {
+                margin-right: variables.$inlineSpacing;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .p-dialog-content {
+        background: variables.$overlayContentBg;
+        color: variables.$panelContentTextColor;
+        padding: variables.$dialogContentPadding;
+
+        &:last-of-type {
+            border-bottom-right-radius: variables.$borderRadius;
+            border-bottom-left-radius: variables.$borderRadius;
+        }
+    }
+
+    .p-dialog-footer {
+        border-top: variables.$dialogFooterBorder;
+        background: variables.$overlayContentBg;
+        color: variables.$panelFooterTextColor;
+        padding: variables.$dialogFooterPadding;
+        text-align: right;
+        border-bottom-right-radius: variables.$borderRadius;
+        border-bottom-left-radius: variables.$borderRadius;
+
+        button {
+            margin: 0 variables.$inlineSpacing 0 0;
+            width: auto;
+        }
+    }
+
+    &.p-dialog-maximized {
+
+        .p-dialog-header,
+        .p-dialog-content:last-of-type {
+            border-radius: 0;
+        }
+    }
+
+    &.p-confirm-dialog {
+        .p-confirm-dialog-icon {
+            font-size: variables.$primeIconFontSize * 2;
+
+            &.p-icon {
+                width: variables.$primeIconFontSize * 2;
+                height: variables.$primeIconFontSize * 2;
+            }
+        }
+
+        .p-confirm-dialog-message {
+            margin-left: variables.$inlineSpacing * 2;
+        }
+    }
+}

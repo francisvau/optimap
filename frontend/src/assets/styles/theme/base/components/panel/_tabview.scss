@@ -1,0 +1,151 @@
+@use '../../../variables';
+@use '../../mixins';
+
+//core
+.p-tabview-nav-container {
+    position: relative;
+}
+
+.p-tabview-scrollable .p-tabview-nav-container {
+    overflow: hidden;
+}
+
+.p-tabview-nav-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior: contain auto;
+    position: relative;
+}
+
+.p-tabview-nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex: 1 1 auto;
+    gap: .5rem;
+}
+
+.p-tabview-nav-link {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.p-tabview-ink-bar {
+    display: none;
+    z-index: 1;
+}
+
+.p-tabview-nav-link:focus {
+    z-index: 1;
+}
+
+.p-tabview-close {
+    z-index: 1;
+}
+
+.p-tabview-title {
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.p-tabview-nav-btn {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-tabview-nav-prev {
+    left: 0;
+}
+
+.p-tabview-nav-next {
+    right: 0;
+}
+
+.p-tabview-nav-content::-webkit-scrollbar {
+    display: none;
+}
+
+//theme
+.p-tabview {
+    .p-tabview-nav {
+        background: variables.$tabviewNavBg;
+        border: variables.$tabviewNavBorder;
+        border-width: variables.$tabviewNavBorderWidth;
+
+        li {
+            margin-right: variables.$tabviewHeaderSpacing;
+
+            .p-tabview-nav-link {
+                border: variables.$tabviewHeaderBorder;
+                border-width: variables.$tabviewHeaderBorderWidth;
+                border-color: variables.$tabviewHeaderBorderColor;
+                background: variables.$tabviewHeaderBg;
+                color: variables.$tabviewHeaderTextColor;
+                padding: variables.$tabviewHeaderPadding;
+                font-weight: variables.$tabviewHeaderFontWeight;
+                border-top-right-radius: variables.$borderRadius;
+                border-top-left-radius: variables.$borderRadius;
+                transition: variables.$listItemTransition;
+                margin: variables.$tabviewHeaderMargin;
+
+                &:not(.p-disabled):focus-visible {
+                    @include mixins.focused-inset();
+                }
+            }
+
+            &:not(.p-highlight):not(.p-disabled):hover {
+                .p-tabview-nav-link {
+                    background: variables.$tabviewHeaderHoverBg;
+                    border-color: variables.$tabviewHeaderHoverBorderColor;
+                    color: variables.$tabviewHeaderTextHoverColor;
+                }
+            }
+
+            &.p-highlight {
+                .p-tabview-nav-link {
+                    background: variables.$tabviewHeaderActiveBg;
+                    border-color: variables.$tabviewHeaderActiveBorderColor;
+                    color: variables.$tabviewHeaderTextActiveColor;
+                }
+            }
+        }
+    }
+
+    .p-tabview-close {
+        margin-left: variables.$inlineSpacing;
+    }
+
+    .p-tabview-nav-btn.p-link {
+        background: variables.$tabviewHeaderActiveBg;
+        color: variables.$tabviewHeaderTextActiveColor;
+        width: variables.$buttonIconOnlyWidth;
+        box-shadow: variables.$raisedButtonShadow;
+        border-radius: 0;
+
+        &:focus-visible {
+            @include mixins.focused-inset();
+        }
+    }
+
+    .p-tabview-panels {
+        background: variables.$tabviewContentBg;
+        padding: variables.$tabviewContentPadding;
+        border: variables.$tabviewContentBorder;
+        color: variables.$tabviewContentTextColor;
+        border-bottom-right-radius: variables.$borderRadius;
+        border-bottom-left-radius: variables.$borderRadius;
+    }
+}

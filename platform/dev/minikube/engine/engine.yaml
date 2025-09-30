@@ -1,0 +1,67 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-engine
+  labels:
+    app: optimap-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: optimap-engine
+  template:
+    metadata:
+      labels:
+        app: optimap-engine
+    spec:
+      initContainers:
+      - name: wait-for-mongo
+        image: busybox
+        command: ['sh', '-c', 'until nc -z mongodb-service 27017; do echo waiting for mongo; sleep 2; done']
+      containers:
+        - name: optimap-engine
+          image: optimap-engine-dev:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO_HOST
+              value: "mongodb-service"
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: "optimap"
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD
+          volumeMounts:
+            - name: engine-source
+              mountPath: /app
+      volumes:
+        - name: engine-source
+          hostPath:
+            path: /mnt/data/engine
+            type: Directory
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: optimap-engine
+spec:
+  selector:
+    app: optimap-engine
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+  type: ClusterIP
+

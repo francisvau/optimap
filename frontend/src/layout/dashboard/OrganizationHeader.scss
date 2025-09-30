@@ -1,0 +1,16 @@
+@use '@/assets/styles/theme/variables' as variables;
+
+#dashboard-organization-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: variables.$surface50;
+    padding: 0.5rem 1rem;
+    margin-top: 2rem;
+
+    #icon {
+        font-size: px;
+        color: variables.$primaryColor;
+    }
+}

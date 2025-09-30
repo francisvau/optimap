@@ -1,0 +1,33 @@
+@use '../../../variables';
+
+.p-mention-panel {
+    background: variables.$inputOverlayBg;
+    color: variables.$inputListTextColor;
+    border: variables.$inputOverlayBorder;
+    border-radius: variables.$borderRadius;
+    box-shadow: variables.$inputOverlayShadow;
+
+    .p-mention-items {
+        padding: variables.$inputListPadding;
+
+        .p-mention-item {
+            margin: variables.$inputListItemMargin;
+            padding: variables.$inputListItemPadding;
+            border: variables.$inputListItemBorder;
+            color: variables.$inputListItemTextColor;
+            background: variables.$inputListItemBg;
+            transition: variables.$listItemTransition;
+            border-radius: variables.$inputListItemBorderRadius;
+
+            &:hover {
+                color: variables.$inputListItemTextHoverColor;
+                background: variables.$inputListItemHoverBg;
+            }
+
+            &.p-highlight {
+                color: variables.$highlightTextColor;
+                background: variables.$highlightBg;
+            }
+        }
+    }
+}

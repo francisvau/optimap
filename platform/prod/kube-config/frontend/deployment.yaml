@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-frontend
+  labels:
+    app: optimap-frontend
+spec:
+  selector:
+    matchLabels:
+      app: optimap-frontend
+  template:
+    metadata:
+      labels:
+        app: optimap-frontend
+    spec:
+      containers:
+        - name: optimap-backend
+          image: optimaprime.designproject.idlab.ugent.be:30069/optimap-frontend:latest
+          imagePullPolicy: Alway

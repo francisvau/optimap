@@ -1,0 +1,246 @@
+@use 'sass:color';
+@use 'sass:list';
+@use '../variables';
+
+@mixin icon-override($icon) {
+    &:before {
+        content: $icon;
+    }
+}
+
+@mixin focused() {
+    outline: variables.$focusOutline;
+    outline-offset: variables.$focusOutlineOffset;
+}
+
+@mixin focused-inset() {
+    outline: variables.$focusOutline;
+    outline-offset: variables.$focusOutlineOffset;
+    box-shadow: inset variables.$focusShadow;
+}
+
+@mixin focused-input() {
+    @include focused();
+    border-color: variables.$inputFocusBorderColor;
+}
+
+@mixin focused-listitem() {
+    outline: variables.$focusOutline;
+    outline-offset: variables.$focusOutlineOffset;
+    box-shadow: variables.$inputListItemFocusShadow;
+}
+
+@mixin invalid-input() {
+    border-color: variables.$inputErrorBorderColor;
+}
+
+@mixin menuitem-link {
+    > .p-menuitem-content {
+        color: variables.$menuitemTextColor;
+        transition: variables.$listItemTransition;
+        border-radius: variables.$menuitemBorderRadius;
+
+        .p-menuitem-link {
+            color: variables.$menuitemTextColor;
+            padding: variables.$menuitemPadding;
+            user-select: none;
+
+            .p-menuitem-text {
+                color: variables.$menuitemTextColor;
+            }
+
+            .p-menuitem-icon {
+                color: variables.$menuitemIconColor;
+                margin-right: variables.$inlineSpacing;
+            }
+
+            .p-submenu-icon {
+                color: variables.$menuitemIconColor;
+            }
+        }
+    }
+
+    &.p-highlight {
+        > .p-menuitem-content {
+            color: variables.$menuitemTextActiveColor;
+            background: variables.$menuitemActiveBg;
+
+            .p-menuitem-link {
+                .p-menuitem-text {
+                    color: variables.$menuitemTextActiveColor;
+                }
+
+                .p-menuitem-icon,
+                .p-submenu-icon {
+                    color: variables.$menuitemIconActiveColor;
+                }
+            }
+        }
+
+        &.p-focus {
+            > .p-menuitem-content {
+                background: variables.$menuitemActiveFocusBg;
+            }
+        }
+    }
+
+    &:not(.p-highlight):not(.p-disabled) {
+        &.p-focus {
+            > .p-menuitem-content {
+                color: variables.$menuitemTextFocusColor;
+                background: variables.$menuitemFocusBg;
+
+                .p-menuitem-link {
+                    .p-menuitem-text {
+                        color: variables.$menuitemTextFocusColor;
+                    }
+
+                    .p-menuitem-icon,
+                    .p-submenu-icon {
+                        color: variables.$menuitemIconFocusColor;
+                    }
+                }
+            }
+        }
+
+        > .p-menuitem-content {
+            &:hover {
+                color: variables.$menuitemTextHoverColor;
+                background: variables.$menuitemHoverBg;
+
+                .p-menuitem-link {
+                    .p-menuitem-text {
+                        color: variables.$menuitemTextHoverColor;
+                    }
+
+                    .p-menuitem-icon,
+                    .p-submenu-icon {
+                        color: variables.$menuitemIconHoverColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin horizontal-rootmenuitem-link {
+    > .p-menuitem-content {
+        color: variables.$horizontalMenuRootMenuitemTextColor;
+        transition: variables.$listItemTransition;
+        border-radius: variables.$horizontalMenuRootMenuitemBorderRadius;
+
+        .p-menuitem-link {
+            padding: variables.$horizontalMenuRootMenuitemPadding;
+            user-select: none;
+
+            .p-menuitem-text {
+                color: variables.$horizontalMenuRootMenuitemTextColor;
+            }
+
+            .p-menuitem-icon {
+                color: variables.$horizontalMenuRootMenuitemIconColor;
+                margin-right: variables.$inlineSpacing;
+            }
+
+            .p-submenu-icon {
+                color: variables.$horizontalMenuRootMenuitemIconColor;
+                margin-left: variables.$inlineSpacing;
+            }
+        }
+    }
+
+    &:not(.p-highlight):not(.p-disabled) {
+        > .p-menuitem-content {
+            &:hover {
+                color: variables.$horizontalMenuRootMenuitemTextHoverColor;
+                background: variables.$horizontalMenuRootMenuitemHoverBg;
+
+                .p-menuitem-link {
+                    .p-menuitem-text {
+                        color: variables.$horizontalMenuRootMenuitemTextHoverColor;
+                    }
+
+                    .p-menuitem-icon,
+                    .p-submenu-icon {
+                        color: variables.$horizontalMenuRootMenuitemIconHoverColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin placeholder {
+    ::-webkit-input-placeholder {
+        @content;
+    }
+    :-moz-placeholder {
+        @content;
+    }
+    ::-moz-placeholder {
+        @content;
+    }
+    :-ms-input-placeholder {
+        @content;
+    }
+}
+
+@mixin scaledPadding($val, $scale) {
+    padding: list.nth($val, 1) * $scale list.nth($val, 2) * $scale;
+}
+
+@mixin scaledFontSize($val, $scale) {
+    font-size: $val * $scale;
+}
+
+@mixin nested-submenu-indents($val, $index, $length) {
+    ul {
+        li {
+            a {
+                padding-left: $val * ($index + 1);
+            }
+
+            @if $index < $length {
+                @include nested-submenu-indents($val, $index + 2, $length);
+            }
+        }
+    }
+}
+
+@mixin action-icon($enabled: true) {
+    width: variables.$actionIconWidth;
+    height: variables.$actionIconHeight;
+    color: variables.$actionIconColor;
+    border: variables.$actionIconBorder;
+    background: variables.$actionIconBg;
+    border-radius: variables.$actionIconBorderRadius;
+    transition: variables.$actionIconTransition;
+
+    @if $enabled {
+        &:enabled:hover {
+            @include action-icon-hover();
+        }
+    } @else {
+        &:hover {
+            @include action-icon-hover();
+        }
+    }
+
+    &:focus-visible {
+        @include focused();
+    }
+}
+
+@mixin action-icon-hover() {
+    color: variables.$actionIconHoverColor;
+    border-color: variables.$actionIconHoverBorderColor;
+    background: variables.$actionIconHoverBg;
+}
+
+@function tint($color, $percentage) {
+    @return color.mix(#fff, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+    @return color.mix(#000, $color, $percentage);
+}

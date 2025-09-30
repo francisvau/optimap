@@ -1,0 +1,15 @@
+@use '../../../variables';
+
+.p-skeleton {
+    background-color: variables.$skeletonBg;
+    border-radius: variables.$borderRadius;
+
+    &:after {
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            variables.$skeletonAnimationBg,
+            rgba(255, 255, 255, 0)
+        );
+    }
+}

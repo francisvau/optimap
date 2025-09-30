@@ -1,0 +1,46 @@
+@use '../../../variables';
+
+.p-divider {
+    .p-divider-content {
+        background-color: variables.$panelContentBg;
+    }
+
+    &.p-divider-horizontal {
+        margin: variables.$dividerHorizontalMargin;
+        padding: variables.$dividerHorizontalPadding;
+
+        &:before {
+            border-top: variables.$dividerSize variables.$dividerColor;
+        }
+
+        .p-divider-content {
+            padding: 0 variables.$inlineSpacing;
+        }
+    }
+
+    &.p-divider-vertical {
+        margin: variables.$dividerVerticalMargin;
+
+        &:before {
+            border-left: variables.$dividerSize variables.$dividerColor;
+        }
+
+        .p-divider-content {
+            padding: variables.$inlineSpacing 0;
+        }
+
+        &.schema-divider {
+            padding: 0;
+            min-height: 1rem;
+            height: 1rem;
+            margin: 0;
+        }
+    }
+
+    &.schema-divider:not(&.p-divider-vertical) {
+        margin: 0;
+        padding: 0;
+        width: calc(100% - 2rem + 1px);
+        margin-left: 1px;
+    }
+}

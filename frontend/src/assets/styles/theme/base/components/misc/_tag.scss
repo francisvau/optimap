@@ -1,0 +1,64 @@
+@use '../../../variables';
+
+@use 'sass:math';
+
+.p-tag {
+    background: variables.$badgeBg;
+    color: variables.$badgeTextColor;
+    font-size: variables.$badgeFontSize;
+    font-weight: variables.$badgeFontWeight;
+    padding: variables.$tagPadding;
+    border-radius: variables.$borderRadius;
+
+    svg {
+        font-size: 14px;
+        color: variables.$surface300;
+    }
+
+    .p-tag-value {
+        display: inline-flex;
+        align-items: center;
+        gap: .25rem;
+        line-height: normal;
+    }
+
+    &.p-tag-contrast {
+        background-color: variables.$contrastButtonBg;
+        color: variables.$contrastButtonTextColor;
+        border: variables.$contrastButtonBorder;
+    }
+
+    &.p-tag-success {
+        background-color: variables.$successButtonBg;
+        color: variables.$successButtonTextColor;
+    }
+
+    &.p-tag-info {
+        background-color: variables.$infoButtonBg;
+        color: variables.$infoButtonTextColor;
+    }
+
+    &.p-tag-warning {
+        background-color: variables.$warningButtonBg;
+        color: variables.$warningButtonTextColor;
+    }
+
+    &.p-tag-danger {
+        background-color: variables.$dangerButtonBg;
+        color: variables.$dangerButtonTextColor;
+    }
+
+    &.outlined {
+        background: none;
+    }
+
+    .p-tag-icon {
+        margin-right: math.div(variables.$inlineSpacing, 2);
+        font-size: variables.$badgeFontSize;
+
+        &.p-icon {
+            width: variables.$badgeFontSize;
+            height: variables.$badgeFontSize;
+        }
+    }
+}

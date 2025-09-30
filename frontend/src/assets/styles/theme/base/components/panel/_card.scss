@@ -1,0 +1,33 @@
+@use '../../../variables';
+
+.p-card {
+    background: variables.$panelContentBg;
+    color: variables.$panelContentTextColor;
+    box-shadow: variables.$cardShadow;
+    border-radius: variables.$borderRadius;
+    border:variables.$cardBorder;
+
+    .p-card-body {
+        padding: variables.$cardBodyPadding;
+    }
+
+    .p-card-title {
+        font-size: variables.$cardTitleFontSize;
+        font-weight: variables.$cardTitleFontWeight;
+        margin-bottom: variables.$cardBodyPadding;
+    }
+
+    .p-card-subtitle {
+        font-weight: variables.$cardSubTitleFontWeight;
+        margin-bottom: variables.$inlineSpacing;
+        color: variables.$cardSubTitleColor;
+    }
+
+    .p-card-content {
+        padding: variables.$cardContentPadding;
+    }
+
+    .p-card-footer {
+        padding: variables.$cardFooterPadding;
+    }
+}

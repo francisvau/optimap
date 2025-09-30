@@ -1,0 +1,72 @@
+stages:
+  - build
+  - test
+  - build-docker
+  - deploy
+
+variables:
+  LOCAL_REGISTRY: "registry.optimaprime.be"
+  IMAGE_NAME: "optimap-backend"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths: []
+  
+before_script:
+  - pip install poetry
+  - poetry install
+
+build-job:
+  stage: build
+  image: python:3.12-slim
+  script:
+    - echo "Building the application" # No build steps yet
+
+unit-test-job:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - poetry run task test
+
+lint-test-job:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - poetry run task lint
+    - poetry run task format
+
+docker-build:
+  stage: build-docker
+  image:
+    name: gcr.io/kaniko-project/executor:v1.19.2-debug
+    entrypoint: [""]
+  variables:
+    COMMIT_TAG: "$LOCAL_REGISTRY/optimaprime-backend:$CI_COMMIT_SHA"
+    LATEST_TAG: "$LOCAL_REGISTRY/optimaprime-backend:latest"
+  before_script:
+    - echo "Configuring Kaniko authentication..."
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$LOCAL_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile.prod"
+      --destination "${COMMIT_TAG}"
+      --destination "${LATEST_TAG}"
+  only:
+  - main
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  before_script: []
+  variables:
+    COMMIT_TAG: "$LOCAL_REGISTRY/optimaprime-backend:$CI_COMMIT_SHA"
+  script:
+    - echo "Deploying to Kubernetes..."
+    - kubectl set image deployment/optimap-backend $IMAGE_NAME="$COMMIT_TAG" -n default
+    - kubectl rollout status deployment/optimap-backend -n default
+    - echo "Running database migrations on Kubernetes..."
+    - kubectl exec -i deployment/optimap-backend -n default -- alembic upgrade heads
+  only:
+    - main

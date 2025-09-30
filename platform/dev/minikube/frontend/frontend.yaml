@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-frontend
+spec:
+  selector:
+    matchLabels:
+      app: optimap-frontend
+  template:
+    metadata:
+      labels:
+        app: optimap-frontend
+    spec:
+      containers:
+        - name: optimap-frontend
+          image: optimap-frontend-dev:latest
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: frontend-source
+              mountPath: /app/src
+      volumes:
+        - name: frontend-source
+          hostPath:
+            path: /mnt/data/frontend/src
+            type: Directory

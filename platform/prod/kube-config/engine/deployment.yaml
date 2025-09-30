@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-engine
+  labels:
+    app: optimap-engine
+spec:
+  selector:
+    matchLabels:
+      app: optimap-engine
+  template:
+    metadata:
+      labels:
+        app: optimap-engine
+    spec:
+      containers:
+        - name: optimap-engine
+          image: registry.optimaprime.be/optimap-engine:latest
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_HOST
+              value: "mongodb-service"
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: "optimap"
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: MONGO_INITDB_ROOT_PASSWORD

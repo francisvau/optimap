@@ -1,0 +1,55 @@
+@use '../../../variables';
+
+.p-dataview {
+    .p-paginator-top {
+        border-width: variables.$tableTopPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-paginator-bottom {
+        border-width: variables.$tableBottomPaginatorBorderWidth;
+        border-radius: 0;
+    }
+
+    .p-dataview-header {
+        background: variables.$tableHeaderBg;
+        color: variables.$tableHeaderTextColor;
+        border: variables.$tableHeaderBorder;
+        border-width: variables.$tableHeaderBorderWidth;
+        padding: variables.$tableHeaderPadding;
+        font-weight: variables.$tableHeaderFontWeight;
+    }
+
+    .p-dataview-content {
+        background: variables.$tableBodyRowBg;
+        color: variables.$tableBodyRowTextColor;
+        border: variables.$dataViewContentBorder;
+        padding: variables.$dataViewContentPadding;
+
+        .p-dataview-emptymessage {
+            padding: 2.5rem;
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+    }
+
+    .p-dataview-footer {
+        background: variables.$tableFooterBg;
+        color: variables.$tableFooterTextColor;
+        border: variables.$tableFooterBorder;
+        border-width: variables.$tableFooterBorderWidth;
+        padding: variables.$tableFooterPadding;
+        font-weight: variables.$tableFooterFontWeight;
+        border-bottom-left-radius: variables.$borderRadius;
+        border-bottom-right-radius: variables.$borderRadius;
+    }
+
+    .p-dataview-loading-icon {
+        font-size: variables.$loadingIconFontSize;
+
+        &.p-icon {
+            width: variables.$loadingIconFontSize;
+            height: variables.$loadingIconFontSize;
+        }
+    }
+}

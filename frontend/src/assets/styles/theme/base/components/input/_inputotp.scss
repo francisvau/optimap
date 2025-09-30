@@ -1,0 +1,13 @@
+@use 'sass:list';
+@use '../../../variables';
+
+.p-inputotp {
+    display: flex;
+    align-items: center;
+    gap: variables.$inlineSpacing;
+}
+
+.p-inputotp-input {
+    text-align: center;
+    width: 2 * list.nth(variables.$inputPadding, 2) + 1rem;
+}

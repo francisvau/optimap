@@ -1,0 +1,13 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-scrollpanel {
+    .p-scrollpanel-bar {
+        background: variables.$scrollPanelTrackBg;
+        border: variables.$scrollPanelTrackBorder;
+
+        &:focus-visible {
+            @include mixins.focused();
+        }
+    }
+}

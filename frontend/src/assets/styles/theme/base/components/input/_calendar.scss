@@ -1,0 +1,254 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-calendar {
+    &.p-invalid.p-component > .p-inputtext {
+        @include mixins.invalid-input();
+    }
+
+    &:not(.p-calendar-disabled).p-focus > .p-inputtext {
+        @include mixins.focused-input();
+    }
+}
+
+.p-datepicker {
+    padding: variables.$calendarPadding;
+    background: variables.$calendarInlineBg;
+    color: variables.$calendarTextColor;
+    border: variables.$calendarBorder;
+    border-radius: variables.$borderRadius;
+
+    &:not(.p-datepicker-inline) {
+        background: variables.$calendarBg;
+        border: variables.$calendarOverlayBorder;
+        box-shadow: variables.$inputOverlayShadow;
+
+        .p-datepicker-header {
+            background: variables.$calendarHeaderBg;
+        }
+    }
+
+    .p-datepicker-header {
+        padding: variables.$calendarHeaderPadding;
+        color: variables.$calendarHeaderTextColor;
+        background: variables.$calendarInlineHeaderBg;
+        font-weight: variables.$calendarHeaderFontWeight;
+        margin: variables.$inputListHeaderMargin;
+        border-bottom: variables.$calendarHeaderBorder;
+        border-top-right-radius: variables.$borderRadius;
+        border-top-left-radius: variables.$borderRadius;
+
+        .p-datepicker-prev,
+        .p-datepicker-next {
+            @include mixins.action-icon();
+        }
+
+        .p-datepicker-title {
+            line-height: variables.$actionIconHeight;
+
+            .p-datepicker-year,
+            .p-datepicker-month {
+                color: variables.$calendarHeaderTextColor;
+                transition: variables.$actionIconTransition;
+                font-weight: variables.$calendarHeaderFontWeight;
+                padding: variables.$calendarHeaderCellPadding;
+
+                &:enabled:hover {
+                    color: variables.$calendarMonthYearHeaderHoverTextColor;
+                }
+            }
+
+            .p-datepicker-month {
+                margin-right: variables.$inlineSpacing;
+            }
+        }
+    }
+
+    table {
+        font-size: variables.$fontSize;
+        margin: variables.$calendarTableMargin;
+
+        th {
+            padding: variables.$calendarHeaderCellPadding;
+
+            > span {
+                width: variables.$calendarCellDateWidth;
+                height: variables.$calendarCellDateHeight;
+            }
+        }
+
+        td {
+            padding: variables.$calendarCellDatePadding;
+
+            > span {
+                width: variables.$calendarCellDateWidth;
+                height: variables.$calendarCellDateHeight;
+                border-radius: variables.$calendarCellDateBorderRadius;
+                transition: variables.$listItemTransition;
+                border: variables.$calendarCellDateBorder;
+
+                &.p-highlight {
+                    color: variables.$highlightTextColor;
+                    background: variables.$highlightBg;
+                }
+
+                &:focus {
+                    @include mixins.focused();
+                }
+            }
+
+            &.p-datepicker-today {
+                > span {
+                    background: variables.$calendarCellDateTodayBg;
+                    color: variables.$calendarCellDateTodayTextColor;
+                    border-color: variables.$calendarCellDateTodayBorderColor;
+
+                    &.p-highlight {
+                        color: variables.$highlightTextColor;
+                        background: variables.$highlightBg;
+                    }
+                }
+            }
+        }
+    }
+
+    .p-datepicker-buttonbar {
+        padding: variables.$calendarButtonBarPadding;
+        border-top: variables.$divider;
+
+        .p-button {
+            width: auto;
+        }
+    }
+
+    .p-timepicker {
+        border-top: variables.$divider;
+        padding: variables.$calendarTimePickerPadding;
+
+        button {
+            @include mixins.action-icon();
+
+            &:last-child {
+                margin-top: 0.2em;
+            }
+        }
+
+        span {
+            font-size: variables.$calendarTimePickerTimeFontSize;
+        }
+
+        > div {
+            padding: variables.$calendarTimePickerElementPadding;
+        }
+    }
+
+    &.p-datepicker-timeonly {
+        .p-timepicker {
+            border-top: 0 none;
+        }
+    }
+
+    .p-monthpicker {
+        margin: variables.$calendarTableMargin;
+
+        .p-monthpicker-month {
+            padding: variables.$calendarCellDatePadding;
+            transition: variables.$listItemTransition;
+            border-radius: variables.$borderRadius;
+
+            &.p-highlight {
+                color: variables.$highlightTextColor;
+                background: variables.$highlightBg;
+            }
+        }
+    }
+
+    .p-yearpicker {
+        margin: variables.$calendarTableMargin;
+
+        .p-yearpicker-year {
+            padding: variables.$calendarCellDatePadding;
+            transition: variables.$listItemTransition;
+            border-radius: variables.$borderRadius;
+
+            &.p-highlight {
+                color: variables.$highlightTextColor;
+                background: variables.$highlightBg;
+            }
+        }
+    }
+
+    &.p-datepicker-multiple-month {
+        .p-datepicker-group {
+            border-left: variables.$divider;
+            padding-right: variables.$calendarPadding;
+            padding-left: variables.$calendarPadding;
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &:first-child {
+                padding-left: 0;
+                border-left: 0 none;
+            }
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+
+    &:not(.p-disabled) {
+        table {
+            td {
+                span:not(.p-highlight):not(.p-disabled) {
+                    &:hover {
+                        background: variables.$calendarCellDateHoverBg;
+                    }
+
+                    &:focus {
+                        @include mixins.focused();
+                    }
+                }
+            }
+        }
+
+        .p-monthpicker {
+            .p-monthpicker-month {
+                &:not(.p-disabled) {
+                    &:not(.p-highlight):hover {
+                        background: variables.$calendarCellDateHoverBg;
+                    }
+
+                    &:focus {
+                        @include mixins.focused();
+                    }
+                }
+            }
+        }
+
+        .p-yearpicker {
+            .p-yearpicker-year {
+                &:not(.p-disabled) {
+                    &:not(.p-highlight):hover {
+                        background: variables.$calendarCellDateHoverBg;
+                    }
+
+                    &:focus {
+                        @include mixins.focused();
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: variables.$calendarBreakpoint) {
+    .p-datepicker {
+        table {
+            th,
+            td {
+                padding: variables.$calendarCellDatePaddingSM;
+            }
+        }
+    }
+}

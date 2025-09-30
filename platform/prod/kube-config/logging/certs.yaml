@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-certificate
+  namespace: monitoring
+spec:
+  secretName: grafana-certs
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: admin.optimaprime.be
+  dnsNames:
+    - admin.optimaprime.be
+    - www.admin.optimaprime.be

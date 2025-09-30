@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: optimap-certificate
+  namespace: default
+spec:
+  secretName: optimap-certs
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: optimaprime.be
+  dnsNames:
+    - optimaprime.be
+    - www.optimaprime.be

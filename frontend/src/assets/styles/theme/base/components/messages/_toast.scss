@@ -1,0 +1,103 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-toast {
+    opacity: variables.$toastOpacity;
+
+    .p-toast-message {
+        margin: variables.$toastMargin;
+        box-shadow: variables.$toastShadow;
+        border-radius: variables.$borderRadius;
+        background: #131831 !important;
+        color: white !important;
+
+        .p-toast-message-content {
+            padding: variables.$toastPadding;
+
+            .p-toast-message-text {
+                margin: variables.$toastMessageTextMargin;
+            }
+
+            .p-toast-message-icon {
+                font-size: variables.$toastIconFontSize;
+
+                &.p-icon {
+                    width: variables.$toastIconFontSize;
+                    height: variables.$toastIconFontSize;
+                }
+            }
+
+            .p-toast-summary {
+                font-weight: variables.$toastTitleFontWeight;
+            }
+
+            .p-toast-detail {
+                margin: variables.$toastDetailMargin;
+            }
+        }
+
+        .p-toast-icon-close {
+            width: variables.$toastIconFontSize;
+            height: variables.$toastIconFontSize;
+            border-radius: variables.$actionIconBorderRadius;
+            background: transparent;
+            transition: variables.$actionIconTransition;
+
+            &:hover {
+                background: variables.$surface200;
+            }
+
+            &:focus-visible {
+                @include mixins.focused();
+            }
+        }
+
+        &.p-toast-message-info {
+            background: variables.$infoMessageBg;
+            border: variables.$infoMessageBorder;
+            border-width: variables.$messageBorderWidth;
+            color: variables.$infoMessageTextColor;
+
+            .p-toast-message-icon,
+            .p-toast-icon-close {
+                color: variables.$infoMessageIconColor;
+            }
+        }
+
+        &.p-toast-message-success {
+            background: variables.$successMessageBg;
+            border: variables.$successMessageBorder;
+            border-width: variables.$messageBorderWidth;
+            color: variables.$successMessageTextColor;
+
+            .p-toast-message-icon,
+            .p-toast-icon-close {
+                color: variables.$successMessageIconColor;
+            }
+        }
+
+        &.p-toast-message-warn {
+            background: variables.$warningMessageBg;
+            border: variables.$warningMessageBorder;
+            border-width: variables.$messageBorderWidth;
+            color: variables.$warningMessageTextColor;
+
+            .p-toast-message-icon,
+            .p-toast-icon-close {
+                color: variables.$warningMessageIconColor;
+            }
+        }
+
+        &.p-toast-message-error {
+            background: variables.$errorMessageBg;
+            border: variables.$errorMessageBorder;
+            border-width: variables.$messageBorderWidth;
+            color: variables.$errorMessageTextColor;
+
+            .p-toast-message-icon,
+            .p-toast-icon-close {
+                color: variables.$errorMessageIconColor;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@use '@/assets/styles/theme/variables';
+
+.schema-action {
+    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+    border-width: 1px;
+    border-color: variables.$surface200;
+    color: variables.$surface600;
+    background: variables.$surface0;
+
+    &-save {
+        @extend .schema-action;
+        background: variables.$primaryColor;
+        color: variables.$primaryTextColor;
+    }
+}

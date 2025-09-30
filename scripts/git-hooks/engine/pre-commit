@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Running Ruff formatter (auto-fixing formatting issues)..."
+poetry run task format || { echo "Formatting failed. Please try manual formatting using the following command: poetry run task format"; exit 1; }
+
+echo "Running Ruff linter (auto-fixing lint issues)..."
+poetry run task lint || { echo "Ruff linting or typechecking failed. Please try manual linting and typechecking using the following command: poetry run task lint"; exit 1; }
+
+# git add app/ test/
+
+echo "All fixes applied and checks passed!"

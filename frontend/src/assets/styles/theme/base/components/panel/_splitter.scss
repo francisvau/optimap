@@ -1,0 +1,26 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-splitter {
+    // border: variables.$panelContentBorder;
+    // border-radius: variables.$borderRadius;
+    background: variables.$panelContentBg;
+    color: variables.$panelContentTextColor;
+
+    .p-splitter-gutter {
+        transition: variables.$actionIconTransition;
+        background: variables.$splitterGutterBg;
+
+        .p-splitter-gutter-handle {
+            background: variables.$splitterGutterHandleBg;
+
+            &:focus-visible {
+                @include mixins.focused();
+            }
+        }
+    }
+
+    .p-splitter-gutter-resizing {
+        background: variables.$splitterGutterHandleBg;
+    }
+}

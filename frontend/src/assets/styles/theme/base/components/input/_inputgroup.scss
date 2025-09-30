@@ -1,0 +1,76 @@
+@use '../../../variables';
+
+.p-inputgroup-addon {
+    background: variables.$inputGroupBg;
+    color: variables.$inputGroupTextColor;
+    border-top: variables.$inputBorder;
+    border-left: variables.$inputBorder;
+    border-bottom: variables.$inputBorder;
+    padding: variables.$inputPadding;
+    min-width: variables.$inputGroupAddOnMinWidth;
+
+    &:last-child {
+        border-right: variables.$inputBorder;
+    }
+}
+
+.p-inputgroup {
+    > .p-component,
+    > .p-inputwrapper > .p-inputtext,
+    > .p-float-label > .p-component {
+        border-radius: 0;
+        margin: 0;
+
+        + .p-inputgroup-addon {
+            border-left: 0 none;
+        }
+
+        &:focus {
+            z-index: 1;
+
+            ~ label {
+                z-index: 1;
+            }
+        }
+    }
+}
+
+.p-inputgroup-addon:first-child,
+.p-inputgroup button:first-child,
+.p-inputgroup input:first-child,
+.p-inputgroup > .p-inputwrapper:first-child,
+.p-inputgroup > .p-inputwrapper:first-child > .p-inputtext {
+    border-top-left-radius: variables.$borderRadius;
+    border-bottom-left-radius: variables.$borderRadius;
+}
+
+.p-inputgroup .p-float-label:first-child input {
+    border-top-left-radius: variables.$borderRadius;
+    border-bottom-left-radius: variables.$borderRadius;
+}
+
+.p-inputgroup-addon:last-child,
+.p-inputgroup button:last-child,
+.p-inputgroup input:last-child,
+.p-inputgroup > .p-inputwrapper:last-child,
+.p-inputgroup > .p-inputwrapper:last-child > .p-inputtext {
+    border-top-right-radius: variables.$borderRadius;
+    border-bottom-right-radius: variables.$borderRadius;
+}
+
+.p-inputgroup .p-float-label:last-child input {
+    border-top-right-radius: variables.$borderRadius;
+    border-bottom-right-radius: variables.$borderRadius;
+}
+
+.p-fluid {
+    .p-inputgroup {
+        .p-button {
+            width: auto;
+
+            &.p-button-icon-only {
+                width: variables.$buttonIconOnlyWidth;
+            }
+        }
+    }
+}

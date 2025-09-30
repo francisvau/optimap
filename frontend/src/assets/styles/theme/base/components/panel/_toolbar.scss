@@ -1,0 +1,13 @@
+@use '../../../variables';
+
+.p-toolbar {
+    background: variables.$panelHeaderBg;
+    border: variables.$panelHeaderBorder;
+    padding: variables.$panelHeaderPadding;
+    border-radius: variables.$borderRadius;
+    gap: variables.$inlineSpacing;
+
+    .p-toolbar-separator {
+        margin: 0 variables.$inlineSpacing;
+    }
+}

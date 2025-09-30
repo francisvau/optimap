@@ -1,0 +1,15 @@
+@use '@/assets/styles/theme/variables' as variables;
+
+.select-schema-dialog {
+    position: relative;
+    padding-bottom: 40px;
+
+    .select-schema-dialog-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: variables.$surface0;
+        padding: 1rem;
+    }
+}

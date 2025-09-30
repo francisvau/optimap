@@ -1,0 +1,79 @@
+@use '../variables';
+@use 'mixins';
+
+* {
+    box-sizing: border-box;
+}
+
+.p-component {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-size: variables.$fontSize;
+    font-weight: variables.$fontWeight;
+}
+
+.p-component-overlay {
+    background-color: variables.$maskBg;
+    transition-duration: variables.$transitionDuration;
+}
+
+.p-disabled,
+.p-component:disabled {
+    opacity: variables.$disabledOpacity;
+}
+
+.p-error {
+    color: variables.$errorColor;
+}
+
+.p-text-secondary {
+    color: variables.$textSecondaryColor;
+}
+
+.pi {
+    font-size: variables.$primeIconFontSize;
+}
+
+.p-icon {
+    width: variables.$primeIconFontSize;
+    height: variables.$primeIconFontSize;
+}
+
+.p-link {
+    font-family: var(--font-family);
+    font-feature-settings: var(--font-feature-settings, normal);
+    font-size: variables.$fontSize;
+    border-radius: variables.$borderRadius;
+
+    &:focus-visible {
+        @include mixins.focused();
+    }
+}
+
+.p-component-overlay-enter {
+    animation: p-component-overlay-enter-animation 150ms forwards;
+}
+
+.p-component-overlay-leave {
+    animation: p-component-overlay-leave-animation 150ms forwards;
+}
+
+.p-component-overlay {
+    @keyframes p-component-overlay-enter-animation {
+        from {
+            background-color: transparent;
+        }
+        to {
+            background-color: var(--maskbg);
+        }
+    }
+
+    @keyframes p-component-overlay-leave-animation {
+        from {
+            background-color: var(--maskbg);
+        }
+        to {
+            background-color: transparent;
+        }
+    }
+}

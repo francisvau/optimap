@@ -1,0 +1,61 @@
+@use '@/assets/styles/theme/variables';
+
+.constraint-tag {
+    font-size: 14px;
+    flex-grow: 0;
+    width: auto !important;
+}
+
+.constraint-input {
+    font-size: 14px;
+    padding: 0.25rem 0.5rem;
+    border: none;
+}
+
+.constraint-examples {
+    font-size: 14px;
+    border: none;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.constraint-dropdown {
+    width: auto !important;
+    display: flex;
+    gap: 0.25rem;
+    justify-content: space-between;
+    font-size: 14px;
+    border: 0;
+    padding: 0.25rem 0.5rem;
+
+    .dropdown-label {
+        padding: 0;
+        width: auto;
+        flex: none;
+        color: variables.$surface600;
+        font-size: 14px;
+    }
+
+    .dropdown-trigger {
+        width: auto;
+        gap: 2px;
+        max-width: 8px;
+    }
+}
+
+.constraint-label {
+    font-weight: normal !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+        color: variables.$surface500;
+    }
+}
+
+.dropdown-item {
+    font-size: 14px;
+    padding: 0.25rem 0.5rem;
+}

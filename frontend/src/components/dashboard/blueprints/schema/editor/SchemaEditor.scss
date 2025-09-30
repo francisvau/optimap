@@ -1,0 +1,182 @@
+@use '@/assets/styles/theme/variables';
+
+.schema-field-wrapper {
+    position: relative;
+
+    // In selectable mode, the fields of the wrapper that are themselves not selectable should be highlighted.
+    // This is to indicate that the user can select them.
+    &.selectable.expandable:hover:not(:has(.schema-field-wrapper.expandable:hover)),
+    &.selected.expandable {
+        // The root field name.
+        >.schema-field,
+        // The child field names.
+        >*>*>.schema-field-wrapper:not(.expandable)>.schema-field {
+            background: variables.$surface100;
+            border-radius: variables.$borderRadius;
+        }
+    }
+
+    // &.selectable.disabled {
+    //     > .schema-field,
+    //     > * > * > .schema-field-wrapper:not(.expandable) > .schema-field {
+    //         background: none !important;
+    //         pointer-events: none;
+    //         cursor: not-allowed;
+    //         opacity: 0.6;
+    //     }
+    // }
+
+    // Show the property add button when hovering over the field wrapper.
+    // Prevent showing the button of the parent when hovering over a child.
+    &:not(:has(.schema-field-wrapper:hover)):hover {
+        > .schema-field-add {
+            opacity: 1;
+            margin-top: 0.5rem;
+
+            .schema-field-add-content {
+                max-height: 36px;
+                margin: 0.2rem 0;
+                opacity: 1;
+                padding: 6px 0;
+            }
+        }
+    }
+
+    .schema-object {
+        width: 100%;
+        padding-left: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-left: 2px solid variables.$surface200;
+    }
+
+    &:hover:not(:has(.schema-object:hover)) {
+        > .schema-field:not(.expandable) {
+            background: variables.$surface100;
+        }
+    }
+
+    .schema-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 0.2rem 0.5rem;
+        border-radius: variables.$borderRadius;
+        min-height: 30px;
+
+        &:hover {
+            background: variables.$surface100;
+
+            .schema-field-meta-action {
+                opacity: 1;
+            }
+        }
+
+        &.add {
+            margin-top: 0.5rem;
+        }
+
+        &-type {
+            font-size: 14px;
+        }
+
+        &-name {
+            font-weight: 500;
+            color: variables.$surface600;
+            transition: all 0.2s ease;
+            font-size: 14px;
+
+            &:focus {
+                outline: none;
+                background: variables.$surface50;
+                border-radius: variables.$borderRadius;
+                padding: 0.25rem 0.5rem;
+            }
+        }
+
+        &-meta {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            color: variables.$surface500;
+
+            &-action {
+                font-size: 14px;
+                transition: all 0.2s ease;
+                color: variables.$primaryDarkerColor;
+                opacity: 0;
+            }
+
+            &-delete {
+                @extend .schema-field-meta-action;
+                color: variables.$surface500;
+            }
+        }
+
+        &-expander {
+            cursor: pointer;
+            color: variables.$surface300;
+            font-size: 14px;
+            margin-right: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 100%;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background: variables.$surface0;
+            }
+        }
+
+        &-nest {
+            display: flex;
+            padding-left: 0.5rem;
+            margin-top: 0.5rem;
+
+            &-separator {
+                border-top: 2px solid variables.$surface200;
+                width: 18px;
+            }
+        }
+    }
+
+    .schema-field-add {
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        transition-delay: 0.2s;
+
+        &.verbose .schema-field-add-content {
+            padding: 6px 0;
+        }
+
+        &:not(.verbose) {
+            opacity: 0;
+
+            .schema-field-add-content {
+                max-height: 0;
+                opacity: 0;
+            }
+        }
+
+        &-content {
+            font-size: 14px;
+            gap: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            transition-delay: 0.2s;
+            cursor: pointer;
+            border: 1px dashed variables.$surface400;
+
+            svg {
+                transition: all 0.2s ease;
+                color: variables.$primaryDarkerColor;
+            }
+        }
+    }
+}

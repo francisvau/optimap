@@ -1,0 +1,12 @@
+[submodule "backend"]
+	path = backend
+	url = git@gitlab.ilabt.imec.be:designproject/dp2025/14-optimap-prime/backend.git
+	branch = main
+[submodule "frontend"]
+	path = frontend
+	url = git@gitlab.ilabt.imec.be:designproject/dp2025/14-optimap-prime/frontend.git
+	branch = main
+[submodule "engine"]
+	path = engine
+	url = git@gitlab.ilabt.imec.be:designproject/dp2025/14-optimap-prime/engine.git
+	branch = main

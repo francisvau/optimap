@@ -1,0 +1,144 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-megamenu {
+    padding: variables.$horizontalMenuPadding;
+    background: variables.$horizontalMenuBg;
+    color: variables.$horizontalMenuTextColor;
+    border: variables.$horizontalMenuBorder;
+    border-radius: variables.$borderRadius;
+
+    .p-megamenu-root-list {
+        outline: 0 none;
+    }
+
+    .p-menuitem {
+        @include mixins.menuitem-link();
+    }
+
+    .p-megamenu-panel {
+        background: variables.$overlayMenuBg;
+        color: variables.$menuTextColor;
+        border: variables.$overlayMenuBorder;
+        box-shadow: variables.$overlayMenuShadow;
+    }
+
+    .p-submenu-header {
+        margin: variables.$submenuHeaderMargin;
+        padding: variables.$submenuHeaderPadding;
+        color: variables.$submenuHeaderTextColor;
+        background: variables.$submenuHeaderBg;
+        font-weight: variables.$submenuHeaderFontWeight;
+        border-top-right-radius: variables.$borderRadius;
+        border-top-left-radius: variables.$borderRadius;
+    }
+
+    .p-submenu-list {
+        padding: variables.$verticalMenuPadding;
+        width: variables.$menuWidth;
+
+        .p-menuitem-separator {
+            border-top: variables.$divider;
+            margin: variables.$menuSeparatorMargin;
+        }
+    }
+
+    &.p-megamenu-vertical {
+        width: variables.$menuWidth;
+        padding: variables.$verticalMenuPadding;
+    }
+
+    .p-megamenu-button {
+        width: variables.$actionIconWidth;
+        height: variables.$actionIconHeight;
+        color: variables.$horizontalMenuRootMenuitemIconColor;
+        border-radius: variables.$actionIconBorderRadius;
+        transition: variables.$actionIconTransition;
+
+        &:hover {
+            color: variables.$horizontalMenuRootMenuitemIconHoverColor;
+            background: variables.$horizontalMenuRootMenuitemHoverBg;
+        }
+
+        &:focus {
+            @include mixins.focused();
+        }
+    }
+
+    &.p-megamenu-horizontal {
+        .p-megamenu-root-list {
+            > .p-menuitem {
+                @include mixins.horizontal-rootmenuitem-link();
+            }
+        }
+    }
+
+    &.p-megamenu-mobile-active {
+        .p-megamenu-root-list {
+            padding: variables.$verticalMenuPadding;
+            background: variables.$overlayMenuBg;
+            border: variables.$overlayMenuBorder;
+            box-shadow: variables.$overlayMenuShadow;
+
+            .p-menu-separator {
+                border-top: variables.$divider;
+                margin: variables.$menuSeparatorMargin;
+            }
+
+            .p-submenu-icon {
+                font-size: variables.$menuitemSubmenuIconFontSize;
+
+                &.p-icon {
+                    width: variables.$menuitemSubmenuIconFontSize;
+                    height: variables.$menuitemSubmenuIconFontSize;
+                }
+            }
+
+            > .p-menuitem {
+                width: 100%;
+                position: static;
+
+                > .p-menuitem-link {
+                    @include mixins.menuitem-link();
+
+                    > .p-submenu-icon {
+                        margin-left: auto;
+                    }
+                }
+
+                &.p-menuitem-active {
+                    > .p-menuitem-link {
+                        > .p-submenu-icon {
+                            transform: rotate(-180deg);
+                        }
+                    }
+                }
+            }
+
+            .p-submenu-list {
+                width: 100%;
+                position: static;
+                box-shadow: none;
+                border: 0 none;
+
+                .p-submenu-icon {
+                    transition: transform variables.$transitionDuration;
+                    transform: rotate(90deg);
+                }
+
+                .p-menuitem-active {
+                    > .p-menuitem-link {
+                        > .p-submenu-icon {
+                            transform: rotate(-90deg);
+                        }
+                    }
+                }
+            }
+
+            .p-menuitem {
+                width: 100%;
+                position: static;
+            }
+        }
+    }
+}

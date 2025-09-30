@@ -1,0 +1,20 @@
+<html>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <div style="background-color: #2e5577; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+            <img src="{{ base64_url_logo }}" alt="Optimap Prime Logo" style="max-width: 200px; height: auto;">
+        </div>
+        <div style="padding: 20px;">
+            <p style="color: #555;"><strong>Hello {{ username }},</strong></p>
+            <p style="color: #555;">
+                {{ job_status_message }}
+            </p>
+            <p style="color: #555;">
+                Job ID: <strong>{{ job_id }}</strong><br>
+                Status: <strong style="text-transform: capitalize;">{{ job_status }}</strong>
+            </p>
+            <p style="color: #555;">Thank you,<br/>The Optimap Prime Team</p>
+        </div>
+    </div>
+</body>
+</html>

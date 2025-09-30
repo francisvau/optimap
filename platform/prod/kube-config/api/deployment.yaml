@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-backend
+  labels:
+    app: optimap-backend
+spec:
+  selector:
+    matchLabels:
+      app: optimap-backend
+  template:
+    metadata:
+      labels:
+        app: optimap-backend
+    spec:
+      containers:
+        - name: optimap-backend
+          image: registry.optimaprime.be/optimap-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
+            - name: POSTGRES_DB
+              value: "optimap"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: SMTP_SERVER
+              value: "smtp.zoho.eu"
+            - name: SMTP_PORT
+              value: "587"
+            - name: SMTP_PW
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-secret
+                  key: SMTP_PW
+            - name: SMTP_USERNAME
+              value: "no-reply@optimaprime.be"
+            - name: PREFIX_URL
+              value: "https://optimaprime.be"

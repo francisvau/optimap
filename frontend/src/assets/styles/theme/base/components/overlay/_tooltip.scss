@@ -1,0 +1,37 @@
+@use '../../../variables';
+
+.p-tooltip {
+    .p-tooltip-text {
+        background: variables.$tooltipBg;
+        color: variables.$tooltipTextColor;
+        padding: variables.$tooltipPadding;
+        box-shadow: variables.$inputOverlayShadow;
+        border-radius: variables.$borderRadius;
+        font-size: variables.$tooltipFontSize;
+        border: variables.$tooltipBorder;
+    }
+
+    &.p-tooltip-right {
+        .p-tooltip-arrow {
+            border-right-color: variables.$tooltipBg;
+        }
+    }
+
+    &.p-tooltip-left {
+        .p-tooltip-arrow {
+            border-left-color: variables.$tooltipBg;
+        }
+    }
+
+    &.p-tooltip-top {
+        .p-tooltip-arrow {
+            border-top-color: variables.$tooltipBg;
+        }
+    }
+
+    &.p-tooltip-bottom {
+        .p-tooltip-arrow {
+            border-bottom-color: variables.$tooltipBg;
+        }
+    }
+}

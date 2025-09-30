@@ -1,0 +1,43 @@
+@use '../../../variables';
+
+.p-fileupload {
+    .p-fileupload-buttonbar {
+        background: variables.$panelHeaderBg;
+        padding: variables.$panelHeaderPadding;
+        border: variables.$panelHeaderBorder;
+        color: variables.$panelHeaderTextColor;
+        border-bottom: 0 none;
+        border-top-right-radius: variables.$borderRadius;
+        border-top-left-radius: variables.$borderRadius;
+        gap: variables.$inlineSpacing;
+
+        .p-button {
+            margin-right: variables.$inlineSpacing;
+        }
+    }
+
+    .p-fileupload-content {
+        background: variables.$panelContentBg;
+        padding: variables.$fileUploadContentPadding;
+        border: variables.$panelContentBorder;
+        color: variables.$panelContentTextColor;
+        border-bottom-right-radius: variables.$borderRadius;
+        border-bottom-left-radius: variables.$borderRadius;
+    }
+
+    .p-progressbar {
+        height: variables.$fileUploadProgressBarHeight;
+    }
+
+    .p-fileupload-row {
+        > div {
+            padding: variables.$tableBodyCellPadding;
+        }
+    }
+
+    &.p-fileupload-advanced {
+        .p-message {
+            margin-top: 0;
+        }
+    }
+}

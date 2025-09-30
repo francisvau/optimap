@@ -1,0 +1,50 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-fieldset {
+    border: variables.$panelContentBorder;
+    background: variables.$panelContentBg;
+    color: variables.$panelContentTextColor;
+    border-radius: variables.$borderRadius;
+
+    .p-fieldset-legend {
+        padding: variables.$panelHeaderPadding;
+        border: variables.$panelHeaderBorder;
+        color: variables.$panelHeaderTextColor;
+        background: variables.$panelHeaderBg;
+        font-weight: variables.$panelHeaderFontWeight;
+        border-radius: variables.$borderRadius;
+    }
+
+    &.p-fieldset-toggleable {
+        .p-fieldset-legend {
+            padding: 0;
+            transition: variables.$actionIconTransition;
+
+            a {
+                padding: variables.$panelHeaderPadding;
+                color: variables.$panelHeaderTextColor;
+                border-radius: variables.$borderRadius;
+                transition: variables.$listItemTransition;
+
+                .p-fieldset-toggler {
+                    margin-right: variables.$inlineSpacing;
+                }
+
+                &:focus-visible {
+                    @include mixins.focused();
+                }
+            }
+
+            &:hover {
+                background: variables.$panelHeaderHoverBg;
+                border-color: variables.$panelHeaderHoverBorderColor;
+                color: variables.$panelHeaderTextHoverColor;
+            }
+        }
+    }
+
+    .p-fieldset-content {
+        padding: variables.$panelContentPadding;
+    }
+}

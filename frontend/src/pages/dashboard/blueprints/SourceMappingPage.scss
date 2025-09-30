@@ -1,0 +1,8 @@
+@use '@/assets/styles/theme/variables';
+
+.mapping-schema {
+    background: variables.$surface50;
+    border-radius: variables.$borderRadius;
+    padding: 1.25rem;
+    height: 100%;
+}

@@ -1,0 +1,82 @@
+@use '../../../variables';
+
+.p-metergroup {
+    .p-metergroup-meter-container {
+        background: variables.$progressBarBg;
+        border-radius: variables.$borderRadius;
+    }
+
+    .p-metergroup-meter {
+        border: variables.$progressBarBorder;
+        background: variables.$progressBarValueBg;
+    }
+
+    .p-metergroup-label-list {
+        .p-metergroup-label-list-item {
+            line-height: variables.$progressBarHeight;
+        }
+
+        .p-metergroup-label-type {
+            background: variables.$progressBarValueBg;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 100%;
+            margin-right: variables.$inlineSpacing;
+        }
+
+        .p-metergroup-label {
+            margin-right: variables.$inlineSpacing * 2;
+        }
+
+        .p-metergroup-label-icon {
+            width: 1rem;
+            height: 1rem;
+            margin-right: variables.$inlineSpacing;
+        }
+    }
+
+    &.p-metergroup-horizontal {
+        .p-metergroup-meter-container {
+            height: 0.5rem;
+        }
+
+        .p-metergroup-meter:first-of-type {
+            border-top-left-radius: variables.$borderRadius;
+            border-bottom-left-radius: variables.$borderRadius;
+        }
+
+        .p-metergroup-meter:last-of-type {
+            border-top-right-radius: variables.$borderRadius;
+            border-bottom-right-radius: variables.$borderRadius;
+        }
+
+        .p-metergroup-label-list-start {
+            margin-bottom: variables.$inlineSpacing * 2;
+        }
+
+        .p-metergroup-label-list-end {
+            margin-top: variables.$inlineSpacing * 2;
+        }
+    }
+
+    &.p-metergroup-vertical {
+        .p-metergroup-meter-container {
+            width: 0.5rem;
+            height: 100%;
+        }
+
+        .p-metergroup-meter:first-of-type {
+            border-top-left-radius: variables.$borderRadius;
+            border-top-right-radius: variables.$borderRadius;
+        }
+
+        .p-metergroup-meter:last-of-type {
+            border-bottom-left-radius: variables.$borderRadius;
+            border-bottom-right-radius: variables.$borderRadius;
+        }
+
+        .p-metergroup-label-list:not(.p-metergroup-label-list-start) {
+            margin-left: variables.$inlineSpacing * 2;
+        }
+    }
+}

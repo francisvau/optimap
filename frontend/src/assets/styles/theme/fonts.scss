@@ -1,0 +1,16 @@
+@mixin font-face($name, $weight, $file) {
+    @font-face {
+        font-family: '#{$name}';
+        font-weight: $weight;
+        font-style: normal;
+        src: url('@/assets/fonts/#{$file}.ttf') format('truetype');
+    }
+}
+
+// Load Roboto variations
+@include font-face('Roboto', 300, 'Roboto/Roboto-Light');
+@include font-face('Roboto', 400, 'Roboto/Roboto-Regular');
+@include font-face('Roboto', 500, 'Roboto/Roboto-Medium');
+@include font-face('Roboto', 600, 'Roboto/Roboto-SemiBold');
+@include font-face('Roboto', 700, 'Roboto/Roboto-Bold');
+@include font-face('Roboto', 800, 'Roboto/Roboto-ExtraBold');

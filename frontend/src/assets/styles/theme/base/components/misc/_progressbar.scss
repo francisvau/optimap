@@ -1,0 +1,19 @@
+@use '../../../variables';
+
+.p-progressbar {
+    border: variables.$progressBarBorder;
+    height: variables.$progressBarHeight;
+    background: variables.$progressBarBg;
+    border-radius: variables.$borderRadius;
+
+    .p-progressbar-value {
+        border: 0 none;
+        margin: 0;
+        background: variables.$progressBarValueBg;
+    }
+
+    .p-progressbar-label {
+        color: variables.$progressBarValueTextColor;
+        line-height: variables.$progressBarHeight;
+    }
+}

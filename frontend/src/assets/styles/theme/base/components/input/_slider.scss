@@ -1,0 +1,52 @@
+@use '../../../variables';
+@use '../../mixins';
+
+@use 'sass:math';
+
+.p-slider {
+    background: variables.$sliderBg;
+    border: variables.$sliderBorder;
+    border-radius: variables.$borderRadius;
+
+    &.p-slider-horizontal {
+        height: variables.$sliderHorizontalHeight;
+
+        .p-slider-handle {
+            margin-top: math.div(-1 * variables.$sliderHandleHeight, 2);
+            margin-left: math.div(-1 * variables.$sliderHandleWidth, 2);
+        }
+    }
+
+    &.p-slider-vertical {
+        width: variables.$sliderVerticalWidth;
+
+        .p-slider-handle {
+            margin-left: math.div(-1 * variables.$sliderHandleWidth, 2);
+            margin-bottom: math.div(-1 * variables.$sliderHandleHeight, 2);
+        }
+    }
+
+    .p-slider-handle {
+        height: variables.$sliderHandleHeight;
+        width: variables.$sliderHandleWidth;
+        background: variables.$sliderHandleBg;
+        border: variables.$sliderHandleBorder;
+        border-radius: variables.$sliderHandleBorderRadius;
+        transition: variables.$formElementTransition;
+
+        &:focus {
+            @include mixins.focused();
+        }
+    }
+
+    .p-slider-range {
+        background: variables.$sliderRangeBg;
+    }
+
+    &:not(.p-disabled) {
+        .p-slider-handle:hover {
+            background: variables.$sliderHandleHoverBg;
+            border-color: variables.$sliderHandleHoverBorderColor;
+        }
+    }
+}

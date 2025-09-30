@@ -1,0 +1,54 @@
+@use 'sass:list';
+@use '../../../variables';
+@use '../../mixins';
+
+.p-tabmenu {
+    .p-tabmenu-nav {
+        background: variables.$tabviewNavBg;
+        border: variables.$tabviewNavBorder;
+        border-width: variables.$tabviewNavBorderWidth;
+
+        .p-tabmenuitem {
+            margin-right: variables.$tabviewHeaderSpacing;
+
+            .p-menuitem-link {
+                border: variables.$tabviewHeaderBorder;
+                border-width: variables.$tabviewHeaderBorderWidth;
+                border-color: variables.$tabviewHeaderBorderColor;
+                background: variables.$tabviewHeaderBg;
+                color: variables.$tabviewHeaderTextColor;
+                padding: variables.$tabviewHeaderPadding;
+                font-weight: variables.$tabviewHeaderFontWeight;
+                border-top-right-radius: variables.$borderRadius;
+                border-top-left-radius: variables.$borderRadius;
+                transition: variables.$listItemTransition;
+                margin: variables.$tabviewHeaderMargin;
+                height: calc(100% + #{-1 * list.nth(variables.$tabviewHeaderMargin, 3)});
+
+                .p-menuitem-icon {
+                    margin-right: variables.$inlineSpacing;
+                }
+
+                &:not(.p-disabled):focus-visible {
+                    @include mixins.focused-inset();
+                }
+            }
+
+            &:not(.p-highlight):not(.p-disabled):hover {
+                .p-menuitem-link {
+                    background: variables.$tabviewHeaderHoverBg;
+                    border-color: variables.$tabviewHeaderHoverBorderColor;
+                    color: variables.$tabviewHeaderTextHoverColor;
+                }
+            }
+
+            &.p-highlight {
+                .p-menuitem-link {
+                    background: variables.$tabviewHeaderActiveBg;
+                    border-color: variables.$tabviewHeaderActiveBorderColor;
+                    color: variables.$tabviewHeaderTextActiveColor;
+                }
+            }
+        }
+    }
+}

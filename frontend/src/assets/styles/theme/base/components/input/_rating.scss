@@ -1,0 +1,84 @@
+@use '../../../variables';
+@use '../../mixins';
+
+@use 'sass:math';
+
+// core
+.p-rating {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.p-rating-item {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.p-rating.p-readonly .p-rating-item {
+    cursor: default;
+}
+
+// theme
+.p-rating {
+    gap: variables.$inlineSpacing;
+
+    .p-rating-item {
+        outline-color: transparent;
+        border-radius: 50%;
+
+        .p-rating-icon {
+            color: variables.$ratingStarIconOffColor;
+            transition: variables.$formElementTransition;
+            font-size: variables.$ratingIconFontSize;
+
+            &.p-icon {
+                width: variables.$ratingIconFontSize;
+                height: variables.$ratingIconFontSize;
+            }
+
+            &.p-rating-cancel {
+                color: variables.$ratingCancelIconColor;
+            }
+        }
+
+        &.p-focus {
+            @include mixins.focused();
+        }
+
+        &.p-rating-item-active {
+            .p-rating-icon {
+                color: variables.$ratingStarIconOnColor;
+            }
+        }
+    }
+
+    &:not(.p-disabled):not(.p-readonly) {
+        .p-rating-item {
+            &:hover {
+                .p-rating-icon {
+                    color: variables.$ratingStarIconHoverColor;
+
+                    &.p-rating-cancel {
+                        color: variables.$ratingCancelIconHoverColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@if (variables.$highlightBg == variables.$ratingStarIconOnColor) {
+    .p-highlight {
+        .p-rating {
+            .p-rating-item {
+                &.p-rating-item-active {
+                    .p-rating-icon {
+                        color: variables.$highlightTextColor;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+@use '../../../variables';
+
+.p-image-mask {
+    --maskbg: #{variables.$imageMaskBg};
+}
+
+.p-image-preview-indicator {
+    background-color: transparent;
+    color: variables.$imagePreviewIndicatorColor;
+    transition: variables.$actionIconTransition;
+
+    .p-icon {
+        width: variables.$imagePreviewActionIconFontSize;
+        height: variables.$imagePreviewActionIconFontSize;
+    }
+}
+
+.p-image-preview-container {
+    &:hover {
+        > .p-image-preview-indicator {
+            background-color: variables.$imagePreviewIndicatorBg;
+        }
+    }
+}
+
+.p-image-toolbar {
+    padding: variables.$imagePreviewToolbarPadding;
+}
+
+.p-image-action.p-link {
+    color: variables.$imagePreviewActionIconColor;
+    background-color: variables.$imagePreviewActionIconBg;
+    width: variables.$imagePreviewActionIconWidth;
+    height: variables.$imagePreviewActionIconHeight;
+    border-radius: variables.$imagePreviewActionIconBorderRadius;
+    transition: variables.$actionIconTransition;
+    margin-right: variables.$inlineSpacing;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        color: variables.$imagePreviewActionIconHoverColor;
+        background-color: variables.$imagePreviewActionIconHoverBg;
+    }
+
+    span {
+        font-size: variables.$imagePreviewActionIconFontSize;
+    }
+
+    .p-icon {
+        width: variables.$imagePreviewActionIconFontSize;
+        height: variables.$imagePreviewActionIconFontSize;
+    }
+}

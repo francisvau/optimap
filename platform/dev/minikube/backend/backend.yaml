@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optimap-backend
+  labels:
+    app: optimap-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: optimap-backend
+  template:
+    metadata:
+      labels:
+        app: optimap-backend
+    spec:
+      containers:
+        - name: optimap-backend
+          image: optimap-backend-dev:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: POSTGRES_HOST
+              value: "optimap-postgres"
+            - name: POSTGRES_DB
+              value: "optimap"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: SMTP_SERVER
+              value: "smtp.zoho.eu"
+            - name: SMTP_PORT
+              value: "587"
+            - name: SMTP_PW
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-secret
+                  key: SMTP_PW
+            - name: SMTP_USERNAME
+              value: "no-reply@optimaprime.be"
+            - name: URL_PREFIX
+              value: "https://optimap.local"
+          volumeMounts:
+            - name: backend-source
+              mountPath: /app
+      volumes:
+        - name: backend-source
+          hostPath:
+            path: /mnt/data/backend
+            type: Directory
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: optimap-backend
+spec:
+  selector:
+    app: optimap-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP
+

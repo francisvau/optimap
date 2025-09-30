@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:10.2.3
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+          env:
+            - name: GF_SMTP_ENABLED
+              value: "true"
+            - name: GF_SMTP_HOST
+              value: "smtp.zoho.eu:587"
+            - name: GF_SMTP_USER
+              value: "no-reply@optimaprime.be"
+            - name: GF_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-secret
+                  key: SMTP_PW
+            - name: GF_SMTP_FROM_ADDRESS
+              value: "no-reply@optimaprime.be"
+            - name: GF_SMTP_FROM_NAME
+              value: "Grafana"
+            - name: GF_SMTP_SKIP_VERIFY
+              value: "true"
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  selector:
+    app: grafana
+  ports:
+    - port: 3000
+

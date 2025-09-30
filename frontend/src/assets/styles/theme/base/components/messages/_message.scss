@@ -1,0 +1,110 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-message {
+    margin: variables.$messageMargin;
+    border-radius: variables.$borderRadius;
+
+    .p-message-wrapper {
+        padding: variables.$messagePadding;
+    }
+
+    .p-message-close {
+        width: variables.$actionIconWidth;
+        height: variables.$actionIconHeight;
+        border-radius: variables.$actionIconBorderRadius;
+        background: transparent;
+        transition: variables.$actionIconTransition;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        &:focus-visible {
+            @include mixins.focused();
+        }
+    }
+
+    &.p-message-info {
+        background: variables.$infoMessageBg;
+        border: variables.$infoMessageBorder;
+        border-width: variables.$messageBorderWidth;
+        color: variables.$infoMessageTextColor;
+
+        .p-message-icon {
+            color: variables.$infoMessageIconColor;
+        }
+
+        .p-message-close {
+            color: variables.$infoMessageIconColor;
+        }
+    }
+
+    &.p-message-success {
+        background: variables.$successMessageBg;
+        border: variables.$successMessageBorder;
+        border-width: variables.$messageBorderWidth;
+        color: variables.$successMessageTextColor;
+
+        .p-message-icon {
+            color: variables.$successMessageIconColor;
+        }
+
+        .p-message-close {
+            color: variables.$successMessageIconColor;
+        }
+    }
+
+    &.p-message-warn {
+        background: variables.$warningMessageBg;
+        border: variables.$warningMessageBorder;
+        border-width: variables.$messageBorderWidth;
+        color: variables.$warningMessageTextColor;
+
+        .p-message-icon {
+            color: variables.$warningMessageIconColor;
+        }
+
+        .p-message-close {
+            color: variables.$warningMessageIconColor;
+        }
+    }
+
+    &.p-message-error {
+        background: variables.$errorMessageBg;
+        border: variables.$errorMessageBorder;
+        border-width: variables.$messageBorderWidth;
+        color: variables.$errorMessageTextColor;
+
+        .p-message-icon {
+            color: variables.$errorMessageIconColor;
+        }
+
+        .p-message-close {
+            color: variables.$errorMessageIconColor;
+        }
+    }
+
+    .p-message-text {
+        font-size: variables.$messageTextFontSize;
+        font-weight: variables.$messageTextFontWeight;
+    }
+
+    .p-message-icon {
+        font-size: variables.$messageIconFontSize;
+        margin-right: variables.$inlineSpacing;
+
+        &.p-icon {
+            width: variables.$messageIconFontSize;
+            height: variables.$messageIconFontSize;
+        }
+    }
+
+    .p-message-summary {
+        font-weight: 700;
+    }
+
+    .p-message-detail {
+        margin-left: variables.$inlineSpacing;
+    }
+}

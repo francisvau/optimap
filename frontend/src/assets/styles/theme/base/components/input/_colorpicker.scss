@@ -1,0 +1,20 @@
+@use '../../../variables';
+
+.p-colorpicker-preview {
+    width: variables.$colorPickerPreviewWidth;
+    height: variables.$colorPickerPreviewHeight;
+}
+
+.p-colorpicker-panel {
+    background: variables.$colorPickerBg;
+    border: variables.$colorPickerBorder;
+
+    .p-colorpicker-color-handle,
+    .p-colorpicker-hue-handle {
+        border-color: variables.$colorPickerHandleColor;
+    }
+}
+
+.p-colorpicker-overlay-panel {
+    box-shadow: variables.$inputOverlayShadow;
+}

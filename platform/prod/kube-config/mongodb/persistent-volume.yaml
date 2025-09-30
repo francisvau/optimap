@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-persistent-volume
+  labels:
+    type: local
+    app: mongodb
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/mongo"

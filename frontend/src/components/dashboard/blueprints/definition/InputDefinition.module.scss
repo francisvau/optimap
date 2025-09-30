@@ -1,0 +1,34 @@
+@use '@/assets/styles/theme/variables';
+
+.input-definition-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border: 1px dashed variables.$surface400;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease-in-out;
+
+    &.selected {
+        background: variables.$surface100;
+    }
+
+    &:hover:not(.selected) {
+        cursor: pointer;
+        background: variables.$surface100;
+    }
+
+    .input-definition {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 1rem;
+        padding: 1rem;
+        width: 100%;
+
+        h4 {
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@use '../../../variables';
+@use '../../mixins';
+
+.p-sidebar {
+    background: variables.$overlayContentBg;
+    color: variables.$panelContentTextColor;
+    border: variables.$overlayContentBorder;
+    box-shadow: variables.$overlayContainerShadow;
+
+    .p-sidebar-header {
+        padding: variables.$panelHeaderPadding;
+
+        .p-sidebar-close,
+        .p-sidebar-icon {
+            @include mixins.action-icon();
+        }
+
+        & + .p-sidebar-content {
+            padding-top: 0;
+        }
+    }
+
+    .p-sidebar-content {
+        padding: variables.$panelContentPadding;
+    }
+}

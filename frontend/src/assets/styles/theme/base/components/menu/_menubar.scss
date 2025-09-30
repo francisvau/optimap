@@ -1,0 +1,220 @@
+@use 'sass:list';
+@use '../../../variables';
+@use '../../mixins';
+
+.p-menubar {
+    padding: variables.$horizontalMenuPadding;
+    background: variables.$horizontalMenuBg;
+    color: variables.$horizontalMenuTextColor;
+    border: variables.$horizontalMenuBorder;
+    border-radius: variables.$borderRadius;
+
+    .p-menubar-root-list {
+        outline: 0 none;
+
+        > .p-menuitem {
+            @include mixins.horizontal-rootmenuitem-link();
+        }
+    }
+
+    .p-menuitem {
+        @include mixins.menuitem-link();
+    }
+
+    .p-submenu-list {
+        padding: variables.$verticalMenuPadding;
+        background: variables.$overlayMenuBg;
+        border: variables.$overlayMenuBorder;
+        box-shadow: variables.$overlayMenuShadow;
+        width: variables.$menuWidth;
+
+        .p-menuitem-separator {
+            border-top: variables.$divider;
+            margin: variables.$menuSeparatorMargin;
+        }
+
+        .p-submenu-icon {
+            font-size: variables.$menuitemSubmenuIconFontSize;
+        }
+    }
+
+    &.p-menubar-mobile {
+        .p-menubar-button {
+            width: variables.$actionIconWidth;
+            height: variables.$actionIconHeight;
+            color: variables.$horizontalMenuRootMenuitemIconColor;
+            border-radius: variables.$actionIconBorderRadius;
+            transition: variables.$actionIconTransition;
+
+            &:hover {
+                color: variables.$horizontalMenuRootMenuitemIconHoverColor;
+                background: variables.$horizontalMenuRootMenuitemHoverBg;
+            }
+
+            &:focus {
+                @include mixins.focused();
+            }
+        }
+
+        .p-menubar-root-list {
+            padding: variables.$verticalMenuPadding;
+            background: variables.$overlayMenuBg;
+            border: variables.$overlayMenuBorder;
+            box-shadow: variables.$overlayMenuShadow;
+
+            .p-menuitem-separator {
+                border-top: variables.$divider;
+                margin: variables.$menuSeparatorMargin;
+            }
+
+            .p-submenu-icon {
+                font-size: variables.$menuitemSubmenuIconFontSize;
+            }
+
+            .p-menuitem {
+                .p-menuitem-content {
+                    .p-menuitem-link {
+                        .p-submenu-icon {
+                            margin-left: auto;
+                            transition: transform variables.$transitionDuration;
+                        }
+                    }
+                }
+
+                &.p-menuitem-active {
+                    > .p-menuitem-content {
+                        > .p-menuitem-link {
+                            > .p-submenu-icon {
+                                transform: rotate(-180deg);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .p-submenu-list {
+                .p-submenu-icon {
+                    transition: transform variables.$transitionDuration;
+                    transform: rotate(90deg);
+                }
+
+                .p-menuitem-active {
+                    > .p-menuitem-content {
+                        > .p-menuitem-link {
+                            > .p-submenu-icon {
+                                transform: rotate(-90deg);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @include mixins.nested-submenu-indents(list.nth(variables.$menuitemPadding, 1), 2, 10);
+        }
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .p-menubar {
+        position: relative;
+
+        .p-menubar-button {
+            display: flex;
+            width: variables.$actionIconWidth;
+            height: variables.$actionIconHeight;
+            color: variables.$horizontalMenuRootMenuitemIconColor;
+            border-radius: variables.$actionIconBorderRadius;
+            transition: variables.$actionIconTransition;
+
+            &:hover {
+                color: variables.$horizontalMenuRootMenuitemIconHoverColor;
+                background: variables.$horizontalMenuRootMenuitemHoverBg;
+            }
+
+            &:focus {
+                @include mixins.focused();
+            }
+        }
+
+        .p-menubar-root-list {
+            position: absolute;
+            display: none;
+            padding: variables.$verticalMenuPadding;
+            background: variables.$overlayMenuBg;
+            border: variables.$overlayMenuBorder;
+            box-shadow: variables.$overlayMenuShadow;
+            width: 100%;
+
+            .p-menu-separator {
+                border-top: variables.$divider;
+                margin: variables.$menuSeparatorMargin;
+            }
+
+            .p-submenu-icon {
+                font-size: variables.$menuitemSubmenuIconFontSize;
+
+                &.p-icon {
+                    width: variables.$menuitemSubmenuIconFontSize;
+                    height: variables.$menuitemSubmenuIconFontSize;
+                }
+            }
+
+            > .p-menuitem {
+                width: 100%;
+                position: static;
+
+                > .p-menuitem-link {
+                    @include mixins.menuitem-link();
+
+                    > .p-submenu-icon {
+                        margin-left: auto;
+                        transition: transform variables.$transitionDuration;
+                    }
+                }
+
+                &.p-menuitem-active {
+                    > .p-menuitem-link {
+                        > .p-submenu-icon {
+                            transform: rotate(-180deg);
+                        }
+                    }
+                }
+            }
+
+            .p-submenu-list {
+                width: 100%;
+                position: static;
+                box-shadow: none;
+                border: 0 none;
+
+                .p-submenu-icon {
+                    transition: transform variables.$transitionDuration;
+                    transform: rotate(90deg);
+                }
+
+                .p-menuitem-active {
+                    > .p-menuitem-link {
+                        > .p-submenu-icon {
+                            transform: rotate(-90deg);
+                        }
+                    }
+                }
+            }
+
+            .p-menuitem {
+                width: 100%;
+                position: static;
+            }
+
+            @include mixins.nested-submenu-indents(list.nth(variables.$menuitemPadding, 1), 2, 10);
+        }
+
+        &.p-menubar-mobile-active .p-menubar-root-list {
+            display: flex;
+            flex-direction: column;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+        }
+    }
+}
